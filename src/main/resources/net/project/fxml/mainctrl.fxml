@@ -28,6 +28,13 @@
                                 <MenuItem mnemonicParsing="false" onAction="#showSymbolsTable" text="Tabla de Símbolos" />
                             </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="Ayuda">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#showUserManual" text="Manual de Usuario" />
+                                <MenuItem mnemonicParsing="false" onAction="#showTechnicalManual" text="Manual Técnico" />
+                                <MenuItem mnemonicParsing="false" onAction="#showAboutUs" text="Acerca de"/>
+                            </items>
+                        </Menu>
                     </menus>
                 </MenuBar>
             </children>

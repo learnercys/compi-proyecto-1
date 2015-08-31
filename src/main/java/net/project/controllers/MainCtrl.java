@@ -13,11 +13,23 @@ public class MainCtrl {
 
     }
 
+    public void showAboutUs() {
+
+    }
+
     public void showErrors() {
 
     }
 
     public void showSymbolsTable() {
+
+    }
+
+    public void showTechnicalManual() {
+
+    }
+
+    public void showUserManual() {
 
     }
 
