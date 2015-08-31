@@ -1,9 +1,21 @@
 package net.project.controllers;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
+import net.project.components.CustomCodeArea;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * @author learnercys on 30/08/15.
  */
-public class MainCtrl {
+public class MainCtrl implements Initializable {
+
+    @FXML BorderPane ccAreaContainer;
+
+    private CustomCodeArea ccArea;
 
     public void closeApplication() {
 
@@ -59,5 +71,12 @@ public class MainCtrl {
 
     public void saveFileAs() {
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // injecting the code area.
+        ccArea = new CustomCodeArea();
+        ccAreaContainer.setCenter(ccArea);
     }
 }

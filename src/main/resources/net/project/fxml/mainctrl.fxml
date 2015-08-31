@@ -45,7 +45,7 @@
             <tabs>
                 <Tab text="Editor" closable="false">
                     <content>
-
+                        <BorderPane fx:id="ccAreaContainer" />
                     </content>
                 </Tab>
                 <Tab text="Estructuras" closable="false" disable="true">
