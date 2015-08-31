@@ -40,4 +40,30 @@
             </children>
         </VBox>
     </top>
+    <center>
+        <TabPane id="tabPane">
+            <tabs>
+                <Tab text="Editor" closable="false">
+                    <content>
+
+                    </content>
+                </Tab>
+                <Tab text="Estructuras" closable="false" disable="true">
+                    <content>
+
+                    </content>
+                </Tab>
+                <Tab text="Escenarios" closable="false" disable="true">
+                    <content>
+
+                    </content>
+                </Tab>
+                <Tab text="Secuencia" closable="false" disable="true">
+                    <content>
+
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>
