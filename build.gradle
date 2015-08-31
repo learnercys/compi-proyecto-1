@@ -1,0 +1,37 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'nz.ac.waikato.cms.weka.thirdparty', name: 'java-cup-11b', version: '2015.03.26'
+}
+
+sourceSets {
+    main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+}
+
+jar {
+    from configurations.compile.collect { zipTree it }
+    manifest.attributes "Main-Class" : "net.project.Main"
+}
+
+tasks.create(name: 'build-run', dependsOn: build) << {
+    println "build-run"
+    exec {
+
+        executable 'java'
+
+        args '-jar', 'build/libs/project-1.0.jar'
+
+    }
+}
+
+
+
