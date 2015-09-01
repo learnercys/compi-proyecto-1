@@ -22,7 +22,7 @@
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#onCompileStructure" text="Compilar archivo de configuración"/>
                                 <MenuItem mnemonicParsing="false" onAction="#onCompileScenarios" text="Compilar archivo de carga de escenarios" />
-                                <MenuItem mnemonicParsing="false" onAction="#onCompileSecuences" text="Compilar archivo de secuencia de escenarios" />
+                                <MenuItem mnemonicParsing="false" onAction="#onCompileSequences" text="Compilar archivo de secuencia de escenarios" />
                                 <MenuItem mnemonicParsing="false" onAction="#executeGame" text="Ejecutar juego"/>
                                 <MenuItem mnemonicParsing="false" onAction="#showErrors" text="Errors"/>
                                 <MenuItem mnemonicParsing="false" onAction="#showSymbolsTable" text="Tabla de Símbolos" />

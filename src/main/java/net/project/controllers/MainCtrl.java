@@ -57,7 +57,7 @@ public class MainCtrl implements Initializable {
 
     }
 
-    public void onCompileSecuences() {
+    public void onCompileSequences() {
 
     }
 
