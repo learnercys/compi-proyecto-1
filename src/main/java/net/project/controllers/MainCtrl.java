@@ -3,6 +3,7 @@ package net.project.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import net.project.components.CustomCodeArea;
 
 import java.net.URL;
@@ -13,12 +14,13 @@ import java.util.ResourceBundle;
  */
 public class MainCtrl implements Initializable {
 
+    @FXML BorderPane root;
     @FXML BorderPane ccAreaContainer;
 
     private CustomCodeArea ccArea;
 
     public void closeApplication() {
-
+        ((Stage)root.getScene().getWindow()).close();
     }
 
     public void executeGame() {
