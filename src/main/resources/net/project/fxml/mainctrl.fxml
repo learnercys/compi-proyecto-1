@@ -24,7 +24,7 @@
                                 <MenuItem mnemonicParsing="false" onAction="#onCompileScenarios" text="Compilar archivo de carga de escenarios" />
                                 <MenuItem mnemonicParsing="false" onAction="#onCompileSequences" text="Compilar archivo de secuencia de escenarios" />
                                 <MenuItem mnemonicParsing="false" onAction="#executeGame" text="Ejecutar juego"/>
-                                <MenuItem mnemonicParsing="false" onAction="#showErrors" text="Errors"/>
+                                <MenuItem mnemonicParsing="false" onAction="#showErrors" text="Errores"/>
                                 <MenuItem mnemonicParsing="false" onAction="#showSymbolsTable" text="Tabla de Símbolos" />
                             </items>
                         </Menu>

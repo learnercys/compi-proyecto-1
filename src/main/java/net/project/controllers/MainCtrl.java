@@ -23,54 +23,93 @@ public class MainCtrl implements Initializable {
         ((Stage)root.getScene().getWindow()).close();
     }
 
+    /**
+     * TODO execute the game
+     */
     public void executeGame() {
 
     }
 
+    /**
+     * TODO show the about us modal
+     */
     public void showAboutUs() {
 
     }
 
+    /**
+     *  TODO Show the current errors
+     */
     public void showErrors() {
 
     }
 
+    /**
+     * TODO Show the symbols table
+     */
     public void showSymbolsTable() {
 
     }
 
+    /**
+     * TODO Show the technical manual
+     */
     public void showTechnicalManual() {
 
     }
 
+    /**
+     * TODO show the user manual
+     */
     public void showUserManual() {
 
     }
 
+    /**
+     * TODO create a new File
+     */
     public void newFile() {
 
     }
 
+    /**
+     * TODO Compile structure
+     */
     public void onCompileStructure() {
 
     }
 
+    /**
+     * TODO Compile scenarios
+     */
     public void onCompileScenarios() {
 
     }
 
+    /**
+     * TODO compile sequences
+     */
     public void onCompileSequences() {
 
     }
 
+    /**
+     * TODO open a new file
+     */
     public void openFile () {
 
     }
 
+    /**
+     * TODO save the current file
+     */
     public void saveFile() {
 
     }
 
+    /**
+     * TODO save the current file as
+     */
     public void saveFileAs() {
 
     }
