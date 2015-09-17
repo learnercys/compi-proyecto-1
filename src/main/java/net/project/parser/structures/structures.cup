@@ -1,10 +1,13 @@
 package net.project.parser.structures;
 
 import java_cup.runtime.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import net.project.utils.GenericAttr;
+import net.project.utils.GenericElement;
 
 parser code{:
-
+    public ArrayList<GenericElement> bgs = new ArrayList<>();
 :}
 
 terminal
@@ -56,7 +59,6 @@ non terminal
     bg,
     bg_elements,
     bg_element,
-    bg_attr,
 
     figure,
     figure_elements,
@@ -78,10 +80,13 @@ non terminal
 
     generic_type;
 
-non terminal HashMap
+non terminal GenericAttr
+    // backgrounds
+    bg_attr;
+
+non terminal GenericElement
     // backgrounds
     bg_attrs;
-
 
 non terminal String
     name,
@@ -105,19 +110,31 @@ bg::= INIT_BG bg_elements END_BG;
 bg_elements::= bg_element
                 | bg_element COMMA bg_elements;
 
-bg_element::= O_BRACE bg_attrs C_BRACE{:
+bg_element::= O_BRACE bg_attrs:bg C_BRACE{:
     // background element found.
-
+    this.parser.bgs.add(bg);
 :};
 
-bg_attrs::= bg_attr SEMICOLON
-            | bg_attr SEMICOLON bg_attrs;
+bg_attrs::= bg_attr:attr SEMICOLON{:
+                RESULT = new GenericElement();
+                RESULT.addAttr(attr);
+            :}
+            | bg_attr:attr SEMICOLON bg_attrs:attrs{:
+                RESULT = new GenericElement();
+                RESULT.addAttr(attr);
+                RESULT.addAll(attrs);
+            :};
 
 // TODO verify if could be a type.
-bg_attr::= name:n
+bg_attr::= name:n{:
+                RESULT = new GenericAttr<String>();
+                RESULT.setType("name");
+                RESULT.setValue(n);
+            :}
             | picture:p{:
-
-
+                RESULT = new GenericAttr<String>();
+                RESULT.setType("picture");
+                RESULT.setValue(p);
             :};
 
 // <figura> </figura>
