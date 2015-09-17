@@ -8,6 +8,7 @@ import net.project.utils.GenericElement;
 
 parser code{:
     public ArrayList<GenericElement> bgs = new ArrayList<>();
+    public ArrayList<GenericElement> figures = new ArrayList<>();
 :}
 
 terminal
@@ -33,8 +34,6 @@ terminal
     NAME,
     PICTURE,
     TYPE,
-    HERO,
-    ENEMY,
     LIVE,
     DESTROY,
     DESCRIPTION,
@@ -48,6 +47,11 @@ terminal Integer
     INT;
 
 terminal String
+    // single words
+    HERO,
+    ENEMY,
+
+    // er
     ID,
     PATH,
     STRING;
@@ -63,10 +67,7 @@ non terminal
     figure,
     figure_elements,
     figure_element,
-    figure_attrs,
-    figure_attr,
     figure_live,
-    figure_type,
     figure_destroy,
     figure_description,
 
@@ -82,13 +83,23 @@ non terminal
 
 non terminal GenericAttr
     // backgrounds
-    bg_attr;
+    bg_attr,
+
+    // figures
+    figure_attr;
 
 non terminal GenericElement
     // backgrounds
-    bg_attrs;
+    bg_attrs,
+
+    //figures
+    figure_attrs;
 
 non terminal String
+    // figure
+    figure_type,
+
+    // general
     name,
     picture;
 
@@ -143,27 +154,66 @@ figure::= INIT_FIGURE figure_elements END_FIGURE;
 figure_elements::= figure_element
                     | figure_element COMMA figure_elements;
 
-figure_element::= O_BRACE figure_attrs C_BRACE;
+figure_element::= O_BRACE figure_attrs:figure C_BRACE{:
+                    this.parser.figures.add(figure);
+                :};
 
-figure_attrs::= figure_attr SEMICOLON
-                | figure_attr SEMICOLON figure_attrs;
+figure_attrs::= figure_attr:attr SEMICOLON{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                :}
+                | figure_attr:attr SEMICOLON figure_attrs:attrs{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                    RESULT.addAll(attrs);
+                :};
 
-figure_attr::= name
-                | picture
-                | figure_type
-                | figure_live
-                | figure_destroy
-                | figure_description;
+figure_attr::= name:n{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("name");
+                    RESULT.setValue(n);
+                :}
+                | picture:p{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("picture");
+                    RESULT.setValue(p);
+                :}
+                | figure_type:type{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("type");
+                    RESULT.setValue(type);
+                :}
+                // TODO  verify if live is between [0,100]
+                | figure_live:live{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("live");
+                    RESULT.setValue(live);
+                :}
+                // TODO verify the value, only can have values like 10,20,30,...,90,100
+                | figure_destroy:destroy{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("destroy");
+                    RESULT.setValue(destroy);
+                :}
+                | figure_description:description{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("description");
+                    RESULT.setValue(description);
+                :};
 
 
-figure_type::= generic_type HERO
-                | generic_type ENEMY;
+figure_type::= generic_type HERO:h{:
+                    RESULT = h;
+                :}
+                | generic_type ENEMY:e{:
+                    RESULT = e;
+                :};
 
-figure_live::= LIVE EQUAL INT;
+figure_live::= LIVE EQUAL INT:i{: RESULT = i; :};
 
-figure_destroy::= DESTROY EQUAL INT;
+figure_destroy::= DESTROY EQUAL INT:i{: RESULT = i; :};
 
-figure_description::= DESCRIPTION EQUAL STRING;
+figure_description::= DESCRIPTION EQUAL STRING:s{: RESULT = s; :};
 
 // <diseño> elements </diseño>
 design::= INIT_DESIGN design_elements END_DESIGN;
@@ -191,8 +241,12 @@ design_destroy::= DESTROY EQUAL INT;
 
 // General elements
 
-name::= NAME EQUAL ID;
+name::= NAME EQUAL ID:id{:
+    RESULT = id;
+:};
 
-picture::= PICTURE EQUAL PATH;
+picture::= PICTURE EQUAL PATH:path{:
+    RESULT = path;
+:};
 
 generic_type::= TYPE EQUAL;
