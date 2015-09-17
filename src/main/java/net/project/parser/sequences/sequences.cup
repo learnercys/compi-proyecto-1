@@ -1,0 +1,17 @@
+package net.project.parser.sequences;
+
+start with sequences;
+
+sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
+
+sequences_elements::= sequences_element
+                    | sequences_element sequences_elements;
+
+sequences_element::= INIT_SCENARIO scenario_attrs SLASH MORE_THAN;
+
+scenario_attrs::= scenario_attr SEMICOLON
+                | scenario_attr SEMICOLON scenario_attrs;
+
+scenario_attr::= NAME EQUAL ID
+                | ORDER EQUAL INT;
+

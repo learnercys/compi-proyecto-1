@@ -1,0 +1,152 @@
+package net.project.parser.scenarios;
+
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import net.project.utils.Scenario;
+
+parser code{:
+    public ArrayList<Scenario> scenarios = new ArrayList<>();
+:}
+
+// single chars
+terminal
+
+    // tags
+    INIT_SCENARIO,
+    END_SCENARIO,
+
+    // single chars
+    O_BRACE,
+    C_BRACE,
+    COMMA,
+    EQUAL,
+    SEMICOLON
+
+    // single words;
+
+non terminal
+    scenarios,
+    scenario_elements,
+    scenario_element,
+
+    characters,
+    characters_elements,
+    characters_element,
+    heroes,
+    enemies,
+    enemies_elements
+
+    walls,
+    floors,
+    extras,
+    finish,
+
+    int_range;
+
+non terminal GenericAttr
+
+non terminal GenericElement
+    scenario_attrs;
+
+non terminal Scenario
+    scenario;
+
+start with scenarios;
+
+scenarios::= scenario:s{:
+                this.parser.scenarios.add(s);
+            :}
+            | scenario:s scenarios{:
+                this.parser.scenarios.add(s);
+            :};
+
+scenario::= INIT_SCENARIO scenario_attrs:attrs C_BRACE scenario_elements END_SCENARIO;
+
+scenario_attrs::= scenario_attr SEMICOLON
+                | scenario_attr SEMICOLON scenario_attrs;
+
+scenario_attr::= name
+                | bg
+                | height
+                | width;
+
+name::= NAME EQUAL ID;
+
+bg::= BG EQUAL ID;
+
+height::= HEIGHT EQUAL INT;
+
+width::= WIDTH EQUAL INT;
+
+scenario_elements::= scenario_element
+                    | scenario_element scenario_elements;
+
+scenario_element::= characters
+                    | walls
+                    | floors
+                    | extras
+                    | finish;
+
+characters::= INIT_CHARACTERS characters_elements END_CHARACTERS;
+
+characters_elements::= characters_element
+                        | characters_element characters_elements;
+
+characters_element::= heroes
+                        | enemies;
+
+heroes::= INIT_HEROES ID O_PAREN INT COMMA INT C_PAREN SEMICOLON END_HEROES;
+
+enemies::= INIT_ENEMIES enemies_elements END_ENEMIES;
+
+enemies_elements::= enemies_element
+                    | enemies_element enemies_elements;
+
+enemies_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+
+walls::= INIT_WALLS walls_elements END_WALLS;
+
+walls_elements::= walls_element
+                | walls_element walls_elements;
+
+walls_element::= ID O_PAREN int_range COMMA int_range C_PAREN SEMICOLON;
+
+floors::= INIT_FLOORS floors_elements END_FLOORS;
+
+floors_elements::= floors_element
+                    | floors_element floors_elements;
+
+floors_element::= ID O_PAREN int_range COMMA int_range C_PARE SEMICOLON;
+
+extras::= INIT_EXTRAS extras_elements END_EXTRAS;
+
+extras_elements::= extras_element
+                    | extras_element extras_elements;
+
+extras_element::= extras_weapons
+                    | extras_bonus;
+
+extras_weapons::= INIT_WEAPONS weapons_elements END_WEAPONS;
+
+weapons_elements::= weapons_element
+                    | weapons_element weapons_elements;
+
+weapons_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+
+extras_bonus::= INIT_BONUS bonus_elements END_BONUS;
+
+bonus_elements::= bonus_element
+                | bonus_element bonus_elements;
+
+bonus_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+
+finish::= INIT_FINISH finish_elements END_FINISH;
+
+finish_elements::= finish_element
+                    | finish_element finish_elements;
+
+finish_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+
+int_range::= INT
+            | INT COMMA INT;
+
