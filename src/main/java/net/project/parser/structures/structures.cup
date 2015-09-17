@@ -1,0 +1,181 @@
+package net.project.parser.structures;
+
+import java_cup.runtime.*;
+import java.util.HashMap;
+
+parser code{:
+
+:}
+
+terminal
+
+    // tags
+    INIT_CONF,
+    END_CONF,
+    INIT_BG,
+    END_BG,
+    INIT_FIGURE,
+    END_FIGURE,
+    INIT_DESIGN,
+    END_DESIGN,
+
+    // single chars
+    O_BRACE,
+    C_BRACE,
+    COMMA,
+    EQUAL,
+    SEMICOLON,
+
+    // single words
+    NAME,
+    PICTURE,
+    TYPE,
+    HERO,
+    ENEMY,
+    LIVE,
+    DESTROY,
+    DESCRIPTION,
+    FINISH,
+    BLOCK,
+    BONUS,
+    BOMB,
+    WEAPON;
+
+terminal Integer
+    INT;
+
+terminal String
+    ID,
+    PATH,
+    STRING;
+
+non terminal
+    structures,
+    elements_conf,
+    element_conf,
+    bg,
+    bg_elements,
+    bg_element,
+    bg_attr,
+
+    figure,
+    figure_elements,
+    figure_element,
+    figure_attrs,
+    figure_attr,
+    figure_live,
+    figure_type,
+    figure_destroy,
+    figure_description,
+
+    design,
+    design_elements,
+    design_element,
+    design_attrs,
+    design_attr,
+    design_type,
+    design_destroy,
+
+    generic_type;
+
+non terminal HashMap
+    // backgrounds
+    bg_attrs;
+
+
+non terminal String
+    name,
+    picture;
+
+start with structures;
+
+// <configuracion> elements </configuracion>
+structures::= INIT_CONF elements_conf END_CONF;
+
+elements_conf::= element_conf
+                | element_conf elements_conf;
+
+element_conf::= bg
+                | figure
+                | design;
+
+// <fondo> elements </fondo>
+bg::= INIT_BG bg_elements END_BG;
+
+bg_elements::= bg_element
+                | bg_element COMMA bg_elements;
+
+bg_element::= O_BRACE bg_attrs C_BRACE{:
+    // background element found.
+
+:};
+
+bg_attrs::= bg_attr SEMICOLON
+            | bg_attr SEMICOLON bg_attrs;
+
+// TODO verify if could be a type.
+bg_attr::= name:n
+            | picture:p{:
+
+
+            :};
+
+// <figura> </figura>
+figure::= INIT_FIGURE figure_elements END_FIGURE;
+
+figure_elements::= figure_element
+                    | figure_element COMMA figure_elements;
+
+figure_element::= O_BRACE figure_attrs C_BRACE;
+
+figure_attrs::= figure_attr SEMICOLON
+                | figure_attr SEMICOLON figure_attrs;
+
+figure_attr::= name
+                | picture
+                | figure_type
+                | figure_live
+                | figure_destroy
+                | figure_description;
+
+
+figure_type::= generic_type HERO
+                | generic_type ENEMY;
+
+figure_live::= LIVE EQUAL INT;
+
+figure_destroy::= DESTROY EQUAL INT;
+
+figure_description::= DESCRIPTION EQUAL STRING;
+
+// <diseño> elements </diseño>
+design::= INIT_DESIGN design_elements END_DESIGN;
+
+design_elements::= design_element
+                    | design_element COMMA design_elements;
+
+design_element::= O_BRACE design_attrs C_BRACE;
+
+design_attrs::= design_attr SEMICOLON
+                | design_attr SEMICOLON design_attrs;
+
+design_attr::= name
+                | picture
+                | design_type
+                | design_destroy;
+
+design_type::= generic_type FINISH
+                | generic_type BLOCK
+                | generic_type BONUS
+                | generic_type BOMB
+                | generic_type WEAPON;
+
+design_destroy::= DESTROY EQUAL INT;
+
+// General elements
+
+name::= NAME EQUAL ID;
+
+picture::= PICTURE EQUAL PATH;
+
+generic_type::= TYPE EQUAL;

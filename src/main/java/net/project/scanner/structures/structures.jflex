@@ -12,7 +12,7 @@ import net.project.parser.structures.sym;
 %line
 %column
 %cupsym sym
-$cup
+%cup
 
 %{
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
@@ -21,7 +21,7 @@ $cup
         return new Symbol(type, yyline, yycolumn);
     }
 
-    private Symbol symbol(int type, String value) {
+    private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn);
     }
 
@@ -37,7 +37,6 @@ SW_CONFIGURATION = "configuracion"
 SW_BG = "fondo"
 SW_FIGURE = "figura"
 SW_DESIGN = "diseño"
-
 
 // tags
 INIT_CONF = {LESS_THAN} {SW_CONFIGURATION} {MORE_THAN}
@@ -55,6 +54,10 @@ END_DESIGN = {LESS_THAN_S} {SW_DESIGN} {MORE_THAN}
 // ER
 ID = [a-zA-Z][a-zA-Z0-9_]+
 
+// todo fix regular expressions
+PATH = 'path'
+STRING = 'string'
+
 %%
 
 //single chars with meaning
@@ -66,19 +69,39 @@ ID = [a-zA-Z][a-zA-Z0-9_]+
 {INIT_BG} { return symbol(sym.INIT_BG); }
 {END_BG} { return symbol(sym.END_BG); }
 
+{INIT_FIGURE} { return symbol(sym.INIT_FIGURE); }
+{END_FIGURE} { return symbol(sym.END_FIGURE); }
+
+{INIT_DESIGN} { return symbol(sym.INIT_DESIGN); }
+{END_DESIGN} { return symbol(sym.END_DESIGN); }
+
 // single chars with meaning
-";" { return symbol(sym.SEMICOLON): }
-"," { return symbol(sym.COLON); }
+";" { return symbol(sym.SEMICOLON); }
+"," { return symbol(sym.COMMA); }
 "=" { return symbol(sym.EQUAL); }
 "{" { return symbol(sym.O_BRACE); }
-"}" { return symbol(sym.C_BRACE): }
+"}" { return symbol(sym.C_BRACE); }
 
 // single words with meaning
 "nombre" { return symbol(sym.NAME); }
 "imagen" { return symbol(sym.PICTURE); }
 "tipo" { return symbol(sym.TYPE); }
+"heroe" { return symbol(sym.HERO); }
+"enemigo" { return symbol(sym.ENEMY); }
+"vida" { return symbol(sym.LIVE); }
+"destruir" { return symbol(sym.DESTROY); }
+"descripcion" { return symbol(sym.DESCRIPTION); }
+"meta" { return symbol(sym.FINISH); }
+"bloque" { return symbol(sym.BLOCK); }
+"bonus" { return symbol(sym.BONUS); }
+"bomba" { return symbol(sym.BOMB); }
+"arma" { return symbol(sym.WEAPON); }
 
+// ER
 {ID} { return symbol(sym.ID); }
+{PATH} { return symbol(sym.PATH); }
+{STRING} { return symbol(sym.STRING); }
+[:digit:]+ { return symbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}
 
