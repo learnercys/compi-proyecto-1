@@ -9,6 +9,7 @@ import net.project.utils.GenericElement;
 parser code{:
     public ArrayList<GenericElement> bgs = new ArrayList<>();
     public ArrayList<GenericElement> figures = new ArrayList<>();
+    public ArrayList<GenericElement> designs = new ArrayList<>();
 :}
 
 terminal
@@ -36,12 +37,7 @@ terminal
     TYPE,
     LIVE,
     DESTROY,
-    DESCRIPTION,
-    FINISH,
-    BLOCK,
-    BONUS,
-    BOMB,
-    WEAPON;
+    DESCRIPTION;
 
 terminal Integer
     INT;
@@ -50,6 +46,11 @@ terminal String
     // single words
     HERO,
     ENEMY,
+    FINISH,
+    BLOCK,
+    BONUS,
+    BOMB,
+    WEAPON,
 
     // er
     ID,
@@ -74,8 +75,6 @@ non terminal
     design,
     design_elements,
     design_element,
-    design_attrs,
-    design_attr,
     design_type,
     design_destroy,
 
@@ -86,14 +85,20 @@ non terminal GenericAttr
     bg_attr,
 
     // figures
-    figure_attr;
+    figure_attr,
+
+    // design
+    design_attr;
 
 non terminal GenericElement
     // backgrounds
     bg_attrs,
 
-    //figures
-    figure_attrs;
+    // figures
+    figure_attrs,
+
+    // design
+    design_attrs;
 
 non terminal String
     // figure
@@ -221,23 +226,48 @@ design::= INIT_DESIGN design_elements END_DESIGN;
 design_elements::= design_element
                     | design_element COMMA design_elements;
 
-design_element::= O_BRACE design_attrs C_BRACE;
+design_element::= O_BRACE design_attrs:design C_BRACE{:
+                    this.parser.designs.add(design);
+                :};
 
-design_attrs::= design_attr SEMICOLON
-                | design_attr SEMICOLON design_attrs;
+design_attrs::= design_attr:attr SEMICOLON{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                :}
+                | design_attr:attr SEMICOLON design_attrs:attrs{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                    RESULT.addAll(attrs);
+                :};
 
-design_attr::= name
-                | picture
-                | design_type
-                | design_destroy;
+design_attr::= name:n{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("name");
+                    RESULT.setValue(n);
+                :}
+                | picture:p{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("picture");
+                    RESULT.setValue(p);
+                :}
+                | design_type:type{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("type");
+                    RESULT.setValue(type);
+                :}
+                | design_destroy:destroy{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("destroy");
+                    RESULT.setValue(destroy);
+                :};
 
-design_type::= generic_type FINISH
-                | generic_type BLOCK
-                | generic_type BONUS
-                | generic_type BOMB
-                | generic_type WEAPON;
+design_type::= generic_type FINISH:t{: RESULT = t; :}
+                | generic_type BLOCK:t{: RESULT = t; :}
+                | generic_type BONUS:t{: RESULT = t; :}
+                | generic_type BOMB:t{: RESULT = t; :}
+                | generic_type WEAPON:t{: RESULT = t; :};
 
-design_destroy::= DESTROY EQUAL INT;
+design_destroy::= DESTROY EQUAL INT:i{: RESULT = i; :};
 
 // General elements
 
