@@ -1,5 +1,26 @@
 package net.project.parser.sequences;
 
+terminal
+    INIT_SCENARIOS,
+    END_SCENARIOS,
+
+    INIT_SCENARIO,
+    MORE_THAN_S,
+
+    SEMICOLON,
+    NAME,
+    EQUAL,
+    ID,
+    ORDER,
+    INT;
+
+non terminal
+    sequences,
+    sequences_elements,
+    sequences_element,
+    scenario_attrs,
+    scenario_attr;
+
 start with sequences;
 
 sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
@@ -7,7 +28,7 @@ sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
 sequences_elements::= sequences_element
                     | sequences_element sequences_elements;
 
-sequences_element::= INIT_SCENARIO scenario_attrs SLASH MORE_THAN;
+sequences_element::= INIT_SCENARIO scenario_attrs MORE_THAN_S;
 
 scenario_attrs::= scenario_attr SEMICOLON
                 | scenario_attr SEMICOLON scenario_attrs;
