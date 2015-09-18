@@ -1,5 +1,13 @@
 package net.project.parser.sequences;
 
+import java.util.ArrayList;
+import net.project.utils.GenericAttr;
+import net.project.utils.GenericElement;
+
+parser code{:
+    public ArrayList<GenericElement> sequences = new ArrayList<>();
+:}
+
 terminal
     INIT_SCENARIOS,
     END_SCENARIOS,
@@ -10,29 +18,58 @@ terminal
     SEMICOLON,
     NAME,
     EQUAL,
-    ID,
-    ORDER,
+    ORDER;
+
+terminal String
+    ID;
+
+terminal Integer
     INT;
 
 non terminal
     sequences,
     sequences_elements,
-    sequences_element,
-    scenario_attrs,
+    sequences_element;
+
+non terminal GenericAttr
     scenario_attr;
+
+non terminal GenericElement
+    scenario_attrs;
 
 start with sequences;
 
 sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
 
-sequences_elements::= sequences_element
-                    | sequences_element sequences_elements;
+sequences_elements::= sequences_element:s{:
+                        this.parser.sequences.add(s);
+                    :}
+                    | sequences_element:s sequences_elements{:
+                        this.parser.sequences.add(s);
+                    :};
 
-sequences_element::= INIT_SCENARIO scenario_attrs MORE_THAN_S;
+sequences_element::= INIT_SCENARIO scenario_attrs:sequence MORE_THAN_S{:
+    this.parser.sequences.add(sequence);
+:};
 
-scenario_attrs::= scenario_attr SEMICOLON
-                | scenario_attr SEMICOLON scenario_attrs;
+scenario_attrs::= scenario_attr:attr SEMICOLON{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                :}
+                | scenario_attr:attr SEMICOLON scenario_attrs:attrs{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                    RESULT.addAll(attrs);
+                :};
 
-scenario_attr::= NAME EQUAL ID
-                | ORDER EQUAL INT;
+scenario_attr::= NAME EQUAL ID:value{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("name");
+                    RESULT.setValue(value);
+                :}
+                | ORDER EQUAL INT:value{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("order");
+                    RESULT.setValue(value);
+                :};
 
