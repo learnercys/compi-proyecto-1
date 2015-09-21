@@ -1,6 +1,6 @@
 package net.project.components;
 
-import net.project.utils.CustomFile;
+import net.project.utils.CFile;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
@@ -10,7 +10,7 @@ import org.fxmisc.richtext.LineNumberFactory;
 public class CustomCodeArea extends CodeArea {
 
     private String savedText;
-    private CustomFile file;
+    private CFile file;
 
     public CustomCodeArea() {
         // by default, show the code line number
@@ -21,5 +21,19 @@ public class CustomCodeArea extends CodeArea {
         if(codeLine) {
             super.setParagraphGraphicFactory(LineNumberFactory.get(this));
         }
+    }
+
+    public void setFile(CFile file) {
+        this.file = file;
+
+        if ( this.file == null) {
+            super.replaceText("");
+        } else {
+            // TODO: read current file and set his text inside the code area
+        }
+    }
+
+    public CFile getFile() {
+        return this.file;
     }
 }

@@ -3,8 +3,10 @@ package net.project.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.project.components.CustomCodeArea;
+import net.project.utils.CFile;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,7 +71,7 @@ public class MainCtrl implements Initializable {
      * TODO create a new File
      */
     public void newFile() {
-
+        ccArea.setFile(null);
     }
 
     /**
@@ -87,7 +89,7 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO compile sequences
+     * compile the sequences
      */
     public void onCompileSequences() {
 
@@ -97,14 +99,30 @@ public class MainCtrl implements Initializable {
      * TODO open a new file
      */
     public void openFile () {
+        FileChooser fileChooser = new FileChooser();
 
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("conf files", "*.conf")
+        );
+
+        try {
+            CFile cFile = new CFile(fileChooser.showOpenDialog(root.getScene().getWindow()));
+
+
+        } catch ( NullPointerException e ) {
+            // something horrible happen, is not my fault.
+        }
     }
 
     /**
      * TODO save the current file
      */
     public void saveFile() {
-
+        if ( ccArea.getFile() == null) {
+            saveFileAs();
+        } else {
+            // TODO save the current file located in the ccArea.
+        }
     }
 
     /**
