@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.project.components.CustomCodeArea;
 import net.project.components.StructuresContainer;
+import net.project.parser.sequences.SequencesParser;
 import net.project.parser.structures.StructuresParser;
+import net.project.scanner.sequences.SequencesScanner;
 import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
 
@@ -120,7 +122,6 @@ public class MainCtrl implements Initializable {
      */
     public void onCompileStructure() {
 
-
         if ( ccArea.getText().trim().length() == 0) {
             // TODO show error, cannot compile empty files
             return;
@@ -155,9 +156,17 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO Compile scenarios
+     * Compile scenarios
      */
     public void onCompileScenarios() {
+        if(ccArea.getText().trim().length() ==0) {
+            // TODO show error list, cannot compile empty files
+            return;
+        }
+        // TODO verify if the current text is saved
+
+        StringReader stringReader = new StringReader(ccArea.getText());
+
 
     }
 
@@ -165,7 +174,33 @@ public class MainCtrl implements Initializable {
      * compile the sequences
      */
     public void onCompileSequences() {
+        if(ccArea.getText().trim().length() == 0) {
+            // todo show error, cannot compile empty files
+            return;
+        }
 
+        // TODO verify structures and scenarios
+
+        StringReader stringReader = new StringReader(ccArea.getText());
+        SequencesScanner sequencesScanner = new SequencesScanner(stringReader);
+        SequencesParser sequencesParser = new SequencesParser(sequencesScanner);
+
+        try {
+            sequencesParser.parse();
+            this.lErrors.clear();
+            this.lErrors.addAll(sequencesScanner.errors);
+            this.sErrors.clear();
+            this.sErrors.addAll(sequencesParser.errors);
+
+            if ( !lErrors.isEmpty() || !sErrors.isEmpty()) {
+                tabSequences.setDisable(true);
+                this.showErrors();
+            } else {
+                tabSequences.setDisable(false);
+            }
+        } catch (Exception e) {
+            // TODO the world is null
+        }
     }
 
     /**

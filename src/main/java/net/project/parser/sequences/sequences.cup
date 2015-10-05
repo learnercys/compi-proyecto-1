@@ -1,10 +1,13 @@
 package net.project.parser.sequences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import net.project.utils.GenericAttr;
 import net.project.utils.GenericElement;
 
 parser code{:
+    public boolean hasUnRecoveredSyntaxError = false;
+    public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
     public ArrayList<GenericElement> sequences = new ArrayList<>();
 :}
 
@@ -41,12 +44,8 @@ start with sequences;
 
 sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
 
-sequences_elements::= sequences_element:s{:
-                        this.parser.sequences.add(s);
-                    :}
-                    | sequences_element:s sequences_elements{:
-                        this.parser.sequences.add(s);
-                    :};
+sequences_elements::= sequences_element
+                    | sequences_element sequences_elements;
 
 sequences_element::= INIT_SCENARIO scenario_attrs:sequence MORE_THAN_S{:
     this.parser.sequences.add(sequence);

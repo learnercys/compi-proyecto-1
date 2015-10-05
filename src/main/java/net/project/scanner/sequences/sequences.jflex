@@ -18,7 +18,7 @@ import net.project.parser.sequences.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     public Symbol symbol(int type) {
-        return new Symbol(type, yyline, yycolumn);
+        return new Symbol(type, yyline, yycolumn, yytext());
     }
 
     public Symbol symbol(int type, Object value) {
