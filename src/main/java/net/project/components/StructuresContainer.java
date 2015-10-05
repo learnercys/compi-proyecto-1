@@ -10,13 +10,13 @@ import java.util.ArrayList;
 /**
  * @author learnercys on 5/10/15.
  */
-public class ScenariosContainer extends BorderPane {
+public class StructuresContainer extends BorderPane {
     private ArrayList<GenericElement> bgs = new ArrayList<>();
     private ArrayList<GenericElement> figures = new ArrayList<>();
     private ArrayList<GenericElement> designs = new ArrayList<>();
 
-    public ScenariosContainer() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scenarioscontainer.fxml"));
+    public StructuresContainer() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("structurescontainer.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
