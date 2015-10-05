@@ -54,9 +54,8 @@ END_DESIGN = {LESS_THAN_S} {SW_DESIGN} {MORE_THAN}
 // ER
 ID = [a-zA-Z][a-zA-Z0-9_]+
 
-// todo fix regular expressions
-PATH = 'path'
-STRING = 'string'
+PATH = ["](\/[^/ ]*)+\/?["]
+STRING = [\"][^\"]+[\"]
 
 %%
 

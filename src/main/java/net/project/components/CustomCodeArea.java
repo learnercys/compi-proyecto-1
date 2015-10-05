@@ -29,7 +29,8 @@ public class CustomCodeArea extends CodeArea {
         if ( this.file == null) {
             super.replaceText("");
         } else {
-            // TODO: read current file and set his text inside the code area
+            // read current file and set his text inside the code area
+            this.replaceText(file.read());
         }
     }
 

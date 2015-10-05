@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import net.project.components.CustomCodeArea;
 import net.project.utils.CFile;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -96,7 +97,7 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO open a new file
+     * open a new file
      */
     public void openFile () {
         FileChooser fileChooser = new FileChooser();
@@ -108,6 +109,9 @@ public class MainCtrl implements Initializable {
         try {
             CFile cFile = new CFile(fileChooser.showOpenDialog(root.getScene().getWindow()));
 
+            if(cFile.canRead()) {
+                ccArea.setFile(cFile);
+            }
 
         } catch ( NullPointerException e ) {
             // something horrible happen, is not my fault.
@@ -115,21 +119,41 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO save the current file
+     *  save the current file
      */
     public void saveFile() {
         if ( ccArea.getFile() == null) {
             saveFileAs();
         } else {
-            // TODO save the current file located in the ccArea.
+            // save the current file located in the ccArea.
+            ccArea.getFile().saveFile(ccArea.getText());
         }
     }
 
     /**
-     * TODO save the current file as
+     * save the current file as
      */
     public void saveFileAs() {
+        FileChooser fileS = new FileChooser();
 
+        fileS.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("xconf files", "*.conf")
+        );
+
+        File file = fileS.showSaveDialog(root.getScene().getWindow());
+
+        // if the file is null the user put the cancel button or close the window.
+        if( file != null ) {
+            // NullPointerException is really bad, sorry. I thing it is easy to fix it, but I haven't time to do it.
+            if( CFile.getExtension(file) == null || !CFile.getExtension(file).equals("conf")  ) {
+                // in case the file does not have extension or the extension is not correct
+                // wee add the correct extension to the current file.
+                file = new File(file.getAbsolutePath() + ".conf");  // just in case
+            }
+            CFile cFile = new CFile(file);
+            cFile.saveFile(ccArea.getText());
+            ccArea.setFile(cFile);
+        }
     }
 
     @Override
