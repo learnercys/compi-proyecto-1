@@ -61,7 +61,7 @@ public class MainCtrl implements Initializable {
     public void showErrors() {
         try {
             MustacheFactory mustacheFactory = new DefaultMustacheFactory();
-            Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("")),"errors.mustache");
+            Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("errors.mustache")),"errors.mustache");
             File tmpFile = new File("/tmp/project-errors.html");
             Errors e = new Errors();
             e.lErrors.addAll(this.lErrors);
@@ -74,6 +74,7 @@ public class MainCtrl implements Initializable {
             table.setScene(new Scene(loader.load()));
             HTMLCtrl tableCtrl = loader.getController();
             tableCtrl.initData(CFile.read(tmpFile), "Errores");
+            System.out.println("temp" + CFile.read(tmpFile));
             table.show();
         } catch (Exception e) {
             e.printStackTrace();
