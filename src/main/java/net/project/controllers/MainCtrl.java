@@ -1,15 +1,28 @@
 package net.project.controllers;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.project.components.CustomCodeArea;
+import net.project.parser.structures.StructuresParser;
+import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
 
 import java.io.File;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -21,6 +34,8 @@ public class MainCtrl implements Initializable {
     @FXML BorderPane ccAreaContainer;
 
     private CustomCodeArea ccArea;
+    public ArrayList<HashMap<String, String>> lErrors = new ArrayList<>();
+    public ArrayList<HashMap<String, String>> sErrors = new ArrayList<>();
 
     public void closeApplication() {
         ((Stage)root.getScene().getWindow()).close();
@@ -41,10 +56,28 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     *  TODO Show the current errors
+     * Show the current errors
      */
     public void showErrors() {
+        try {
+            MustacheFactory mustacheFactory = new DefaultMustacheFactory();
+            Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("")),"errors.mustache");
+            File tmpFile = new File("/tmp/project-errors.html");
+            Errors e = new Errors();
+            e.lErrors.addAll(this.lErrors);
+            e.sErrors.addAll(this.sErrors);
+            mustache.execute(new PrintWriter( tmpFile ), e).flush();
 
+            Stage table = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("htmlctrl.fxml"));
+
+            table.setScene(new Scene(loader.load()));
+            HTMLCtrl tableCtrl = loader.getController();
+            tableCtrl.initData(CFile.read(tmpFile), "Errores");
+            table.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -76,10 +109,38 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO Compile structure
+     * Compile structure
      */
     public void onCompileStructure() {
 
+
+        if ( ccArea.getText().trim().length() == 0) {
+            // TODO show error, cannot compile empty files
+            return;
+        }
+
+        // TODO verify if the current text is saved
+
+        StringReader stringReader = new StringReader(ccArea.getText());
+        StructuresScanner structuresScanner = new StructuresScanner(stringReader);
+        StructuresParser structuresParser = new StructuresParser(structuresScanner);
+
+        try {
+            structuresParser.parse();
+            this.lErrors.clear();
+            this.lErrors.addAll(structuresScanner.errors);
+            this.sErrors.clear();
+            this.sErrors.addAll(structuresParser.errors);
+
+            if ( !lErrors.isEmpty() || !sErrors.isEmpty()) {
+                this.showErrors();
+            } else {
+
+            }
+
+        } catch (Exception e ) {
+            // TODO the world is unfair.
+        }
     }
 
     /**
@@ -161,5 +222,10 @@ public class MainCtrl implements Initializable {
         // injecting the code area.
         ccArea = new CustomCodeArea();
         ccAreaContainer.setCenter(ccArea);
+    }
+
+    public class Errors {
+        public ArrayList<HashMap<String,String>> lErrors = new ArrayList<>();
+        public ArrayList<HashMap<String,String>> sErrors = new ArrayList<>();
     }
 }

@@ -18,11 +18,12 @@ import net.project.parser.structures.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     private Symbol symbol(int type) {
-        return new Symbol(type, yyline, yycolumn);
+        System.out.println("init" + yytext() + " " + type + "end");
+        return new Symbol(type, yyline, yycolumn, yytext());
     }
 
     private Symbol symbol(int type, Object value) {
-        return new Symbol(type, yyline, yycolumn);
+        return new Symbol(type, yyline, yycolumn, value);
     }
 
 %}
@@ -54,7 +55,7 @@ END_DESIGN = {LESS_THAN_S} {SW_DESIGN} {MORE_THAN}
 // ER
 ID = [a-zA-Z][a-zA-Z0-9_]+
 
-PATH = ["](\/[^/ ]*)+\/?["]
+PATH = [\"](\/[^/\" ]*)+\/?[\"]
 STRING = [\"][^\"]+[\"]
 
 %%

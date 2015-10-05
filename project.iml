@@ -24,5 +24,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.reactfx:reactfx:2.0-M4u1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.fxmisc.flowless:flowless:0.4.5" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.fxmisc.wellbehaved:wellbehavedfx:0.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.github.spullara.mustache.java:compiler:0.9.0" level="project" />
   </component>
 </module>

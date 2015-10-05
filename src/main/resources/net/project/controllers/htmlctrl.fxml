@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.project.controllers.HTMLCtrl">
+    <stylesheets>
+        <URL value="@../fxml/css/styles.css" />
+    </stylesheets>
+    <top>
+        <VBox alignment="CENTER" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="title" styleClass="h1" text="Label" />
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>
+
