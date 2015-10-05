@@ -18,11 +18,12 @@ import net.project.parser.structures.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     private Symbol symbol(int type) {
-        System.out.println("init" + yytext() + " " + type + "end");
+        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn, yytext());
     }
 
-    private Symbol symbol(int type, Object value) {
+    private Symbol symbol(int type, String value) {
+        System.out.println( value );
         return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -99,8 +100,8 @@ STRING = [\"][^\"]+[\"]
 
 // ER
 {ID} { return symbol(sym.ID); }
-{PATH} { return symbol(sym.PATH); }
-{STRING} { return symbol(sym.STRING); }
+{PATH} { return symbol(sym.PATH, yytext().substring(1, yytext().length() - 1)); }
+{STRING} { return symbol(sym.STRING, yytext().substring(1, yytext().length() - 1)); }
 [:digit:]+ { return symbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}

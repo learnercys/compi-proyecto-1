@@ -1,6 +1,10 @@
 package net.project.components;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import net.project.utils.GenericElement;
 
@@ -15,6 +19,12 @@ public class StructuresContainer extends BorderPane {
     private ArrayList<GenericElement> figures = new ArrayList<>();
     private ArrayList<GenericElement> designs = new ArrayList<>();
 
+    // Current Background
+    private int cbg = 1;
+
+    @FXML ImageView bgImage;
+    @FXML Label bgName;
+
     public StructuresContainer() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("structurescontainer.fxml"));
         fxmlLoader.setRoot(this);
@@ -27,9 +37,21 @@ public class StructuresContainer extends BorderPane {
         }
     }
 
-    public void setBg(ArrayList<GenericElement> bgs) {
+    private void setBg(int change) {
+        int tmp = cbg + change;
+        if ( tmp >= 0 && tmp < this.bgs.size()) {
+            cbg += change;
+            GenericElement bg = this.bgs.get(cbg);
+            bgName.setText((String)bg.getAttr("name").getValue());
+            // todo validate if the picture already exist
+            //bgImage.setImage(new Image((String)bg.getAttr("picture").getValue()));
+        }
+    }
+
+    public void setBgs(ArrayList<GenericElement> bgs) {
         this.bgs = bgs;
         // todo show bgs
+        setBg(-1); // initial index, zero.
     }
 
     public void setFigures(ArrayList<GenericElement> figures) {
@@ -43,7 +65,7 @@ public class StructuresContainer extends BorderPane {
     }
 
     public void setStr(ArrayList<GenericElement> bgs, ArrayList<GenericElement> figures, ArrayList<GenericElement> designs) {
-        setBg(bgs);
+        setBgs(bgs);
         setFigures(figures);
         setDesigns(designs);
     }

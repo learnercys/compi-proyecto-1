@@ -20,6 +20,15 @@ public class GenericElement {
         this.attrs.add(attr);
     }
 
+    public GenericAttr getAttr(String type) {
+        for( GenericAttr attr : this.attrs) {
+            if ( type.equals(attr.getType())) {
+                return attr;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<GenericAttr> getAttrs() {
         return this.attrs;
     }
