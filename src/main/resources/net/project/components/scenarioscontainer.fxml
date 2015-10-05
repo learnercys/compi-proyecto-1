@@ -1,0 +1,29 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@../fxml/css/styles.css" />
+    </stylesheets>
+    <top>
+        <VBox alignment="CENTER" styleClass="header">
+            <children>
+                <Label styleClass="h1" text="Fondos" />
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" styleClass="header">
+            <children>
+                <Label styleClass="h1" text="Figuras" />
+            </children>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER" styleClass="header">
+            <children>
+                <Label styleClass="h1" text="Diseños" />
+            </children>
+        </VBox>
+    </bottom>
+</fx:root>

@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.project.components.CustomCodeArea;
+import net.project.components.ScenariosContainer;
 import net.project.parser.structures.StructuresParser;
 import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
@@ -32,6 +34,10 @@ public class MainCtrl implements Initializable {
 
     @FXML BorderPane root;
     @FXML BorderPane ccAreaContainer;
+    @FXML ScenariosContainer sc;
+    @FXML Tab tabStructures;
+    @FXML Tab tabScenarios;
+    @FXML Tab tabSequences;
 
     private CustomCodeArea ccArea;
     public ArrayList<HashMap<String, String>> lErrors = new ArrayList<>();
@@ -134,9 +140,13 @@ public class MainCtrl implements Initializable {
             this.sErrors.addAll(structuresParser.errors);
 
             if ( !lErrors.isEmpty() || !sErrors.isEmpty()) {
+                tabScenarios.setDisable(true);
+                tabStructures.setDisable(true);
+                tabSequences.setDisable(true);
                 this.showErrors();
             } else {
-
+                sc.setStr(structuresParser.bgs, structuresParser.figures, structuresParser.designs);
+                tabStructures.setDisable(false);
             }
 
         } catch (Exception e ) {
