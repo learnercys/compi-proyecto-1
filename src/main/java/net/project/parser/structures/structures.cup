@@ -52,6 +52,7 @@ terminal
     TYPE,
     LIVE,
     DESTROY,
+    CREDITS,
     DESCRIPTION;
 
 terminal Integer
@@ -92,6 +93,7 @@ non terminal
     design_element,
     design_type,
     design_destroy,
+    design_credits,
 
     generic_type;
 
@@ -277,6 +279,11 @@ design_attr::= name:n{:
                     RESULT = new GenericAttr<Integer>();
                     RESULT.setType("destroy");
                     RESULT.setValue(destroy);
+                :}
+                | design_credits:credit{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("credits");
+                    RESULT.setValue(credit);
                 :};
 
 design_type::= generic_type FINISH:t{: RESULT = t; :}
@@ -286,6 +293,8 @@ design_type::= generic_type FINISH:t{: RESULT = t; :}
                 | generic_type WEAPON:t{: RESULT = t; :};
 
 design_destroy::= DESTROY EQUAL INT:i{: RESULT = i; :};
+
+design_credits::= CREDITS EQUAL INT:i{: RESULT = i; :};
 
 // General elements
 

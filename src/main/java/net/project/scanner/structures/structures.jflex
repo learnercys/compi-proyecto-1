@@ -97,6 +97,7 @@ STRING = [\"][^\"]+[\"]
 "enemigo" { return symbol(sym.ENEMY); }
 "vida" { return symbol(sym.LIVE); }
 "destruir" { return symbol(sym.DESTROY); }
+"creditos" { return symbol(sym.CREDITS); }
 "descripcion" { return symbol(sym.DESCRIPTION); }
 "meta" { return symbol(sym.FINISH); }
 "bloque" { return symbol(sym.BLOCK); }
