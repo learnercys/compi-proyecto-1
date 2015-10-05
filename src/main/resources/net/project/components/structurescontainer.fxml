@@ -29,6 +29,14 @@
             <children>
                 <Label styleClass="h1" text="Figuras" />
             </children>
+            <HBox>
+                <Label text="Nombre:"/>
+                <Label fx:id="fgName"/>
+            </HBox>
+            <HBox>
+                <Button>Anterior</Button>
+                <Button>Siguiente</Button>
+            </HBox>
         </VBox>
     </center>
     <right>
@@ -36,6 +44,14 @@
             <children>
                 <Label styleClass="h1" text="Diseños" />
             </children>
+            <HBox>
+                <Label text="Nombre:"/>
+                <Label fx:id="dgName"/>
+            </HBox>
+            <HBox>
+                <Button>Anterior</Button>
+                <Button>Siguiente</Button>
+            </HBox>
         </VBox>
     </right>
 </fx:root>

@@ -4,6 +4,7 @@ import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.project.parser.structures.sym;
+import java.lang.Integer;
 
 %%
 %public
@@ -25,6 +26,11 @@ import net.project.parser.structures.sym;
     private Symbol symbol(int type, String value) {
         System.out.println( value );
         return new Symbol(type, yyline, yycolumn, value);
+    }
+
+    private Symbol intSymbol(int type) {
+        System.out.println(Integer.parseInt(yytext()));
+        return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 
 %}
@@ -102,7 +108,7 @@ STRING = [\"][^\"]+[\"]
 {ID} { return symbol(sym.ID); }
 {PATH} { return symbol(sym.PATH, yytext().substring(1, yytext().length() - 1)); }
 {STRING} { return symbol(sym.STRING, yytext().substring(1, yytext().length() - 1)); }
-[:digit:]+ { return symbol(sym.INT); }
+[:digit:]+ { return intSymbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}
 

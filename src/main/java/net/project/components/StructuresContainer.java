@@ -21,9 +21,13 @@ public class StructuresContainer extends BorderPane {
 
     // Current Background
     private int cbg = 1;
+    private int cfg = 1;
+    private int cdg = 1;
 
     @FXML ImageView bgImage;
     @FXML Label bgName;
+    @FXML Label fgName;
+    @FXML Label dgName;
 
     public StructuresContainer() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("structurescontainer.fxml"));
@@ -39,7 +43,7 @@ public class StructuresContainer extends BorderPane {
 
     private void setBg(int change) {
         int tmp = cbg + change;
-        if ( tmp >= 0 && tmp < this.bgs.size()) {
+        if ( tmp >= 0 && tmp < this.bgs.size() && this.bgs.size() > 0) {
             cbg += change;
             GenericElement bg = this.bgs.get(cbg);
             bgName.setText((String)bg.getAttr("name").getValue());
@@ -48,20 +52,41 @@ public class StructuresContainer extends BorderPane {
         }
     }
 
+    private void setFg(int change) {
+        int tmp = cfg + change;
+        if(tmp >= 0 && tmp < this.figures.size() && this.figures.size() > 0) {
+            cfg += change;
+            GenericElement fg = this.figures.get(cfg);
+            fgName.setText((String)fg.getAttr("name").getValue());
+            // todo validate if the picture already exist
+        }
+    }
+
+    private void setDg(int change) {
+        int tmp = cdg + change;
+        if(tmp >= 0 && tmp < this.designs.size() && this.designs.size() > 0){
+            cdg += change;
+            GenericElement dg = this.designs.get(cdg);
+            dgName.setText((String)dg.getAttr("name").getValue());
+        }
+    }
+
     public void setBgs(ArrayList<GenericElement> bgs) {
         this.bgs = bgs;
-        // todo show bgs
+        // show bgs
         setBg(-1); // initial index, zero.
     }
 
     public void setFigures(ArrayList<GenericElement> figures) {
         this.figures = figures;
-        // todo show figures
+        // show figures
+        setFg(-1);
     }
 
     public void setDesigns(ArrayList<GenericElement> designs) {
         this.designs = designs;
-        // todo show designs
+        // show designs
+        setDg(-1);
     }
 
     public void setStr(ArrayList<GenericElement> bgs, ArrayList<GenericElement> figures, ArrayList<GenericElement> designs) {

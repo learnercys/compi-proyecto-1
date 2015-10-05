@@ -6,6 +6,7 @@ import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.project.parser.structures.sym;
+import java.lang.Integer;
 
 
 /**
@@ -370,8 +371,13 @@ public class StructuresScanner implements java_cup.runtime.Scanner {
     }
 
     private Symbol symbol(int type, String value) {
-    System.out.println( value );
+        System.out.println( value );
         return new Symbol(type, yyline, yycolumn, value);
+    }
+
+    private Symbol intSymbol(int type) {
+        System.out.println(Integer.parseInt(yytext()));
+        return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 
 
@@ -389,7 +395,7 @@ public class StructuresScanner implements java_cup.runtime.Scanner {
   /** 
    * Unpacks the compressed character translation table.
    *
-   * @param packed   the packed character translation table
+   *  @param packed   the packed character translation table
    * @return         the unpacked character translation table
    */
   private static char [] zzUnpackCMap(String packed) {
@@ -794,7 +800,7 @@ public class StructuresScanner implements java_cup.runtime.Scanner {
             }
           case 39: break;
           case 8: 
-            { return symbol(sym.INT);
+            { return intSymbol(sym.INT);
             }
           case 40: break;
           case 9: 
