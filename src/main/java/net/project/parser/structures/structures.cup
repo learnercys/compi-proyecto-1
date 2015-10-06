@@ -78,6 +78,7 @@ non terminal
     elements_conf,
     element_conf,
     bg,
+    bg_attr,
     bg_elements,
     bg_element,
 
@@ -99,7 +100,6 @@ non terminal
 
 non terminal GenericAttr
     // backgrounds
-    bg_attr,
 
     // figures
     figure_attr,

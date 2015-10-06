@@ -38,9 +38,10 @@ LESS_THAN_S = "</"
 MORE_THAN = ">"
 
 // single words
+SW_SCENARIO = "scenario"
 SW_CHARACTERS = "personajes"
 SW_HEROES = "heroes"
-SW_VILLAIN = "villano"
+SW_VILLAINS = "villanos"
 SW_WALLS = "paredes"
 SW_FLOOR = "suelo"
 SW_EXTRAS = "extras"
@@ -59,6 +60,16 @@ INIT_VILLAINS = {LESS_THAN} {SW_VILLAINS} {MORE_THAN}
 END_VILLAINS = {LESS_THAN_S} {SW_VILLAINS} {MORE_THAN}
 INIT_WALLS = {LESS_THAN} {SW_WALLS} {MORE_THAN}
 END_WALLS = {LESS_THAN_S} {SW_WALLS} {MORE_THAN}
+INIT_FLOOR = {LESS_THAN} {SW_FLOOR} {MORE_THAN}
+END_FLOOR = {LESS_THAN_S} {SW_FLOOR} {MORE_THAN}
+INIT_EXTRAS = {LESS_THAN} {SW_EXTRAS} {MORE_THAN}
+END_EXTRAS = {LESS_THAN_S} {SW_EXTRAS} {MORE_THAN}
+INIT_WEAPONS = {LESS_THAN} {SW_WEAPONS} {MORE_THAN}
+END_WEAPONS = {LESS_THAN_S} {SW_WEAPONS} {MORE_THAN}
+INIT_BONUS = {LESS_THAN} {SW_BONUS} {MORE_THAN}
+END_BONUS = {LESS_THAN_S} {SW_BONUS} {MORE_THAN}
+INIT_FINISH = {LESS_THAN} {SW_FINISH} {MORE_THAN}
+END_FINISH = {LESS_THAN_S} {SW_FINISH} {MORE_THAN}
 
 // ER
 ID = [a-zA-Z][a-zA-Z0-9_]+
@@ -75,7 +86,16 @@ ID = [a-zA-Z][a-zA-Z0-9_]+
 {END_VILLAINS} { return symbol(sym.END_VILLAINS); }
 {INIT_WALLS} { return symbol(sym.INIT_WALLS); }
 {END_WALLS} { return symbol(sym.END_WALLS); }
-
+{INIT_FLOOR} { return symbol(sym.INIT_FLOOR); }
+{END_FLOOR} { return symbol(sym.END_FLOOR); }
+{INIT_EXTRAS} { return symbol(sym.INIT_EXTRAS); }
+{END_EXTRAS} { return symbol(sym.END_EXTRAS); }
+{INIT_WEAPONS} { return symbol(sym.INIT_WEAPONS); }
+{END_WEAPONS} { return symbol(sym.END_WEAPONS); }
+{INIT_BONUS} { return symbol(sym.INIT_BONUS); }
+{END_BONUS} { return symbol(sym.END_BONUS); }
+{INIT_FINISH} { return symbol(sym.INIT_FINISH); }
+{END_FINISH} { return symbol(sym.END_FINISH); }
 
 // single chars with meaning
 {MORE_THAN} { return symbol(sym.MORE_THAN); }
@@ -84,18 +104,18 @@ ID = [a-zA-Z][a-zA-Z0-9_]+
 "," { return symbol(sym.COMMA); }
 "(" { return symbol(sym.O_PAREN); }
 ")" { return symbol(sym.C_PAREN); }
-
+"." { return symbol(sym.DOT); }
 
 
 // single words with meaning
 "nombre" { return symbol(sym.NAME); }
-"fondo" { return symbol(sym.BACKGROUND); }
+"fondo" { return symbol(sym.BG); }
 "ancho" { return symbol(sym.WIDTH); }
 "alto" { return symbol(sym.HEIGHT); }
 
 // ER
 {ID} { return symbol(sym.ID); }
-[:digit:]+ { return symbol(sym.INT); }
+[:digit:]+ { return intSymbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}
 

@@ -16,7 +16,7 @@ public class Main extends Application {
         BorderPane root = FXMLLoader.load(getClass().getResource("fxml/mainctrl.fxml"));
         ROOT_PATH = getClass().getResource("").getPath();
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
+        primaryStage.setMaximized(false);
         primaryStage.show();
     }
 

@@ -14,36 +14,85 @@ terminal
     // tags
     INIT_SCENARIO,
     END_SCENARIO,
+    INIT_CHARACTERS,
+    END_CHARACTERS,
+    INIT_HEROES,
+    END_HEROES,
+    INIT_VILLAINS,
+    END_VILLAINS,
+    INIT_WALLS,
+    END_WALLS,
+    INIT_FLOOR,
+    END_FLOOR,
+    INIT_EXTRAS,
+    END_EXTRAS,
+    INIT_WEAPONS,
+    END_WEAPONS,
+    INIT_BONUS,
+    END_BONUS,
+    INIT_FINISH,
+    END_FINISH,
 
     // single chars
-    O_BRACE,
-    C_BRACE,
+    O_PAREN,
+    C_PAREN,
     COMMA,
+    DOT,
     EQUAL,
-    SEMICOLON
+    SEMICOLON,
+    MORE_THAN,
 
-    // single words;
+    // single words
+    NAME,
+    BG,
+    HEIGHT,
+    WIDTH,
+
+    // ER
+    ID,
+    INT
+    ;
 
 non terminal
     scenarios,
     scenario_elements,
     scenario_element,
+    scenario_attr,
 
     characters,
     characters_elements,
     characters_element,
     heroes,
-    enemies,
-    enemies_elements
+    villains,
+    villains_elements,
+    villains_element,
 
     walls,
+    walls_elements,
+    walls_element,
     floors,
+    floors_elements,
+    floors_element,
     extras,
+    extras_elements,
+    extras_element,
+    extras_weapons,
+    weapons_elements,
+    weapons_element,
+    extras_bonus,
+    bonus_elements,
+    bonus_element,
     finish,
+    finish_elements,
+    finish_element,
 
+    name,
+    bg,
+    height,
+    width,
     int_range;
 
-non terminal GenericAttr
+//non terminal GenericAttr
 
 non terminal GenericElement
     scenario_attrs;
@@ -93,16 +142,16 @@ characters_elements::= characters_element
                         | characters_element characters_elements;
 
 characters_element::= heroes
-                        | enemies;
+                        | villains;
 
 heroes::= INIT_HEROES ID O_PAREN INT COMMA INT C_PAREN SEMICOLON END_HEROES;
 
-enemies::= INIT_ENEMIES enemies_elements END_ENEMIES;
+villains::= INIT_VILLAINS villains_elements END_VILLAINS;
 
-enemies_elements::= enemies_element
-                    | enemies_element enemies_elements;
+villains_elements::= villains_element
+                    | villains_element villains_elements;
 
-enemies_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+villains_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
 
 walls::= INIT_WALLS walls_elements END_WALLS;
 
@@ -111,12 +160,12 @@ walls_elements::= walls_element
 
 walls_element::= ID O_PAREN int_range COMMA int_range C_PAREN SEMICOLON;
 
-floors::= INIT_FLOORS floors_elements END_FLOORS;
+floors::= INIT_FLOOR floors_elements END_FLOOR;
 
 floors_elements::= floors_element
                     | floors_element floors_elements;
 
-floors_element::= ID O_PAREN int_range COMMA int_range C_PARE SEMICOLON;
+floors_element::= ID O_PAREN int_range COMMA int_range C_PAREN SEMICOLON;
 
 extras::= INIT_EXTRAS extras_elements END_EXTRAS;
 
@@ -148,5 +197,5 @@ finish_elements::= finish_element
 finish_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
 
 int_range::= INT
-            | INT COMMA INT;
+            | INT DOT DOT INT;
 
