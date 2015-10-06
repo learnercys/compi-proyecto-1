@@ -60,7 +60,7 @@ scenarios::= scenario:s{:
                 this.parser.scenarios.add(s);
             :};
 
-scenario::= INIT_SCENARIO scenario_attrs:attrs C_BRACE scenario_elements END_SCENARIO;
+scenario::= INIT_SCENARIO scenario_attrs:attrs MORE_THAN scenario_elements END_SCENARIO;
 
 scenario_attrs::= scenario_attr SEMICOLON
                 | scenario_attr SEMICOLON scenario_attrs;

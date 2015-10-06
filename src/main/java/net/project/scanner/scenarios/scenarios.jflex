@@ -18,25 +18,83 @@ import net.project.parser.scenarios.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     private Symbol symbol(int type) {
-        return new Symbol(type, yyline, yycolumn);
+        System.out.println( yytext() );
+        return new Symbol(type, yyline, yycolumn, yytext());
     }
 
-    private Symbol symbol(int type, Object value) {
-        return new Symbol(type, yyline, yycolumn);sss
+    private Symbol symbol(int type, String value) {
+        System.out.println( value );
+        return new Symbol(type, yyline, yycolumn, value);
+    }
+
+    private Symbol intSymbol(int type) {
+        System.out.println(Integer.parseInt(yytext()));
+        return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 %}
+// single charts
+LESS_THAN = "<"
+LESS_THAN_S = "</"
+MORE_THAN = ">"
 
+// single words
+SW_CHARACTERS = "personajes"
+SW_HEROES = "heroes"
+SW_VILLAIN = "villano"
+SW_WALLS = "paredes"
+SW_FLOOR = "suelo"
+SW_EXTRAS = "extras"
+SW_WEAPONS = "armas"
+SW_BONUS = "bonus"
+SW_FINISH = "meta"
+
+// tags
+INIT_SCENARIO = {LESS_THAN} {SW_SCENARIO}
+END_SCENARIO = {LESS_THAN_S} {SW_SCENARIO} {MORE_THAN}
+INIT_CHARACTERS = {LESS_THAN} {SW_CHARACTERS} {MORE_THAN}
+END_CHARACTERS = {LESS_THAN_S} {SW_CHARACTERS} {MORE_THAN}
+INIT_HEROES = {LESS_THAN} {SW_HEROES} {MORE_THAN}
+END_HEROES = {LESS_THAN_S} {SW_HEROES} {MORE_THAN}
+INIT_VILLAINS = {LESS_THAN} {SW_VILLAINS} {MORE_THAN}
+END_VILLAINS = {LESS_THAN_S} {SW_VILLAINS} {MORE_THAN}
+INIT_WALLS = {LESS_THAN} {SW_WALLS} {MORE_THAN}
+END_WALLS = {LESS_THAN_S} {SW_WALLS} {MORE_THAN}
+
+// ER
+ID = [a-zA-Z][a-zA-Z0-9_]+
 %%
 
 // tags
+{INIT_SCENARIO} { return symbol(sym.INIT_SCENARIO); }
+{END_SCENARIO} { return symbol(sym.END_SCENARIO); }
+{INIT_CHARACTERS} { return symbol(sym.INIT_CHARACTERS); }
+{END_CHARACTERS} { return symbol(sym.END_CHARACTERS); }
+{INIT_HEROES} { return symbol(sym.INIT_HEROES); }
+{END_HEROES} { return symbol(sym.END_HEROES); }
+{INIT_VILLAINS} { return symbol(sym.INIT_VILLAINS); }
+{END_VILLAINS} { return symbol(sym.END_VILLAINS); }
+{INIT_WALLS} { return symbol(sym.INIT_WALLS); }
+{END_WALLS} { return symbol(sym.END_WALLS); }
+
 
 // single chars with meaning
+{MORE_THAN} { return symbol(sym.MORE_THAN); }
+"=" { return symbol(sym.EQUAL); }
+";" { return symbol(sym.SEMICOLON); }
+"," { return symbol(sym.COMMA); }
+"(" { return symbol(sym.O_PAREN); }
+")" { return symbol(sym.C_PAREN); }
+
+
 
 // single words with meaning
+"nombre" { return symbol(sym.NAME); }
+"fondo" { return symbol(sym.BACKGROUND); }
+"ancho" { return symbol(sym.WIDTH); }
+"alto" { return symbol(sym.HEIGHT); }
 
 // ER
 {ID} { return symbol(sym.ID); }
-{STRING} { return symbol(sym.STRING); }
 [:digit:]+ { return symbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}
