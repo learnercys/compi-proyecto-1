@@ -60,14 +60,23 @@ public class CFile extends File {
             e.printStackTrace();
         }
 
-
         return stringBuilder.toString();
     }
 
+    /**
+     *
+     * @param file
+     * @return empty String or the extension
+     * @throws NullPointerException
+     */
     public static String getExtension( File file ) throws NullPointerException{
         if( file.getName().lastIndexOf( "." ) < 0 ) {
             return null;
         }
+        if(file.getName().lastIndexOf(".") == -1){
+            return "";
+        }
+
         return file.getName().substring( file.getName().lastIndexOf( "." ) + 1, file.getName().length() );
     }
 

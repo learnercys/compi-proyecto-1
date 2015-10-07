@@ -77,6 +77,12 @@ public class MainCtrl implements Initializable {
      * Show the current errors
      */
     public void showErrors() {
+
+        if(this.lErrors.size() == 0 && this.sErrors.size() == 0) {
+            // todo: cannot show the error list, not errors to show
+            return;
+        }
+
         try {
             MustacheFactory mustacheFactory = new DefaultMustacheFactory();
             Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("errors.mustache")),"errors.mustache");
@@ -97,13 +103,36 @@ public class MainCtrl implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**
      * TODO Show the symbols table
      */
     public void showSymbolsTable() {
+        if(this.lErrors.size() > 0 || this.sErrors.size() > 0) {
+            // todo: cannot show symbols table, errors found.
+            return;
+        }
 
+        try {
+            MustacheFactory mustacheFactory = new DefaultMustacheFactory();
+            Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("symbols.mustache")), "symbols.mustache");
+            File tmpFile = new File("/tmp/project-symbols.html");
+            SymbolsTable symbolsTable = new SymbolsTable();
+            mustache.execute(new PrintWriter(tmpFile), symbolsTable).flush();
+
+            Stage table = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("htmlctrl.fxml"));
+
+            table.setScene(new Scene(loader.load()));
+            HTMLCtrl tableCtrl = loader.getController();
+            tableCtrl.initData(CFile.read(tmpFile), "Simbolos");
+            table.show();
+
+        } catch (Exception e) {
+            // todo  cannot read file
+        }
     }
 
     /**
@@ -321,5 +350,9 @@ public class MainCtrl implements Initializable {
     public class Errors {
         public ArrayList<HashMap<String,String>> lErrors = new ArrayList<>();
         public ArrayList<HashMap<String,String>> sErrors = new ArrayList<>();
+    }
+
+    private class SymbolsTable {
+
     }
 }
