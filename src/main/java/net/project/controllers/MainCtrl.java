@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.project.components.CustomCodeArea;
 import net.project.components.StructuresContainer;
+import net.project.parser.scenarios.ScenariosParser;
 import net.project.parser.sequences.SequencesParser;
 import net.project.parser.structures.StructuresParser;
+import net.project.scanner.scenarios.ScenariosScanner;
 import net.project.scanner.sequences.SequencesScanner;
 import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
@@ -34,14 +36,18 @@ import java.util.ResourceBundle;
  */
 public class MainCtrl implements Initializable {
 
+
     @FXML BorderPane root;
     @FXML BorderPane ccAreaContainer;
-    @FXML StructuresContainer sc;
+    @FXML StructuresContainer stc;
     @FXML Tab tabStructures;
     @FXML Tab tabScenarios;
     @FXML Tab tabSequences;
 
     private CustomCodeArea ccArea;
+    private boolean structuresErrors = false;
+    private boolean scenariosErrors = false;
+    private boolean sequencesErrors = false;
     public ArrayList<HashMap<String, String>> lErrors = new ArrayList<>();
     public ArrayList<HashMap<String, String>> sErrors = new ArrayList<>();
 
@@ -145,9 +151,11 @@ public class MainCtrl implements Initializable {
                 tabStructures.setDisable(true);
                 tabSequences.setDisable(true);
                 this.showErrors();
+                this.structuresErrors = true;
             } else {
-                sc.setStr(structuresParser.bgs, structuresParser.figures, structuresParser.designs);
+                stc.setStr(structuresParser.bgs, structuresParser.figures, structuresParser.designs);
                 tabStructures.setDisable(false);
+                this.structuresErrors = false;
             }
 
         } catch (Exception e ) {
@@ -165,8 +173,35 @@ public class MainCtrl implements Initializable {
         }
         // TODO verify if the current text is saved
 
-        StringReader stringReader = new StringReader(ccArea.getText());
+        if( this.structuresErrors ) {
+            // TODO send a warning, cannot compile if the structures has errors
+            showErrors();
+            return;
+        }
 
+        StringReader stringReader = new StringReader(ccArea.getText());
+        ScenariosScanner scenariosScanner = new ScenariosScanner(stringReader);
+        ScenariosParser scenariosParser = new ScenariosParser(scenariosScanner);
+
+        try {
+            scenariosParser.parse();
+            this.lErrors.clear();
+            this.lErrors.addAll(scenariosScanner.errors);
+            this.sErrors.clear();
+            this.sErrors.addAll(scenariosParser.errors);
+
+            if(!lErrors.isEmpty() || !sErrors.isEmpty()) {
+                tabScenarios.setDisable(true);
+                tabSequences.setDisable(true);
+                this.showErrors();
+                this.scenariosErrors = true;
+            } else {
+                tabScenarios.setDisable(false);
+                this.scenariosErrors = false;
+            }
+        } catch (Exception e) {
+            // todo: reading error or something
+        }
 
     }
 

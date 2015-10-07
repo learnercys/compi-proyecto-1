@@ -2,11 +2,14 @@ package net.project.parser.scenarios;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import net.project.utils.Scenario;
 import net.project.utils.GenericAttr;
 import net.project.utils.GenericElement;
 
 parser code{:
+    public boolean hasUnRecoveredSyntaxError = false;
+    public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
     public ArrayList<Scenario> scenarios = new ArrayList<>();
 :}
 

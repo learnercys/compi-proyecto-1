@@ -38,7 +38,7 @@ LESS_THAN_S = "</"
 MORE_THAN = ">"
 
 // single words
-SW_SCENARIO = "scenario"
+SW_SCENARIO = "escenario"
 SW_CHARACTERS = "personajes"
 SW_HEROES = "heroes"
 SW_VILLAINS = "villanos"
