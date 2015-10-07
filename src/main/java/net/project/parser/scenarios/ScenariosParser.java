@@ -8,6 +8,9 @@ package net.project.parser.scenarios;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import net.project.utils.Scenario;
+import net.project.utils.GenericAttr;
+import net.project.utils.GenericElement;
+
 
 /** CUP v0.11b 20150930 (SVN rev 66) generated parser.
   */
@@ -34,22 +37,22 @@ public class ScenariosParser extends java_cup.runtime.lr_parser {
     unpackFromStrings(new String[] {
     "\000\072\000\002\002\004\000\002\002\003\000\002\002" +
     "\004\000\002\045\007\000\002\044\004\000\002\044\005" +
-    "\000\002\005\003\000\002\005\003\000\002\005\003\000" +
-    "\002\005\003\000\002\037\005\000\002\040\005\000\002" +
-    "\041\005\000\002\042\005\000\002\003\003\000\002\003" +
-    "\004\000\002\004\003\000\002\004\003\000\002\004\003" +
-    "\000\002\004\003\000\002\004\003\000\002\006\005\000" +
-    "\002\007\003\000\002\007\004\000\002\010\003\000\002" +
-    "\010\003\000\002\011\013\000\002\012\005\000\002\013" +
-    "\003\000\002\013\004\000\002\014\011\000\002\015\005" +
-    "\000\002\016\003\000\002\016\004\000\002\017\011\000" +
-    "\002\020\005\000\002\021\003\000\002\021\004\000\002" +
-    "\022\011\000\002\023\005\000\002\024\003\000\002\024" +
-    "\004\000\002\025\003\000\002\025\003\000\002\026\005" +
-    "\000\002\027\003\000\002\027\004\000\002\030\011\000" +
-    "\002\031\005\000\002\032\003\000\002\032\004\000\002" +
-    "\033\011\000\002\034\005\000\002\035\003\000\002\035" +
-    "\004\000\002\036\011\000\002\043\003\000\002\043\006" +
+    "\000\002\042\003\000\002\042\003\000\002\042\003\000" +
+    "\002\042\003\000\002\035\005\000\002\036\005\000\002" +
+    "\037\005\000\002\040\005\000\002\043\003\000\002\043" +
+    "\004\000\002\041\003\000\002\041\003\000\002\041\003" +
+    "\000\002\041\003\000\002\041\003\000\002\003\005\000" +
+    "\002\004\003\000\002\004\004\000\002\005\003\000\002" +
+    "\005\003\000\002\006\013\000\002\007\005\000\002\010" +
+    "\003\000\002\010\004\000\002\011\011\000\002\012\005" +
+    "\000\002\013\003\000\002\013\004\000\002\014\011\000" +
+    "\002\015\005\000\002\016\003\000\002\016\004\000\002" +
+    "\017\011\000\002\020\005\000\002\021\003\000\002\021" +
+    "\004\000\002\022\003\000\002\022\003\000\002\023\005" +
+    "\000\002\024\003\000\002\024\004\000\002\025\011\000" +
+    "\002\026\005\000\002\027\003\000\002\027\004\000\002" +
+    "\030\011\000\002\031\005\000\002\032\003\000\002\032" +
+    "\004\000\002\033\011\000\002\034\003\000\002\034\006" +
     "" });
 
   /** Access to production table. */
@@ -144,59 +147,59 @@ public class ScenariosParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\207\000\006\002\005\045\004\001\001\000\016\005" +
-    "\012\037\010\040\013\041\017\042\011\044\015\001\001" +
+    "\000\207\000\006\002\005\045\004\001\001\000\016\035" +
+    "\010\036\013\037\017\040\011\042\012\044\015\001\001" +
     "\000\006\002\007\045\004\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\020\003\035\004\037\006" +
-    "\034\015\033\020\041\023\036\034\044\001\001\000\012" +
-    "\024\151\025\150\026\154\031\152\001\001\000\006\016" +
-    "\136\017\135\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\020\003\132\004" +
-    "\037\006\034\015\033\020\041\023\036\034\044\001\001" +
-    "\000\006\021\115\022\114\001\001\000\002\001\001\000" +
-    "\006\035\101\036\102\001\001\000\012\007\046\010\050" +
-    "\011\047\012\045\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\012\007\076" +
-    "\010\050\011\047\012\045\001\001\000\002\001\001\000" +
-    "\006\013\055\014\054\001\001\000\002\001\001\000\006" +
-    "\013\057\014\054\001\001\000\002\001\001\000\002\001" +
+    "\001\001\000\002\001\001\000\020\003\034\012\033\015" +
+    "\041\020\036\031\044\041\037\043\035\001\001\000\012" +
+    "\021\151\022\150\023\154\026\152\001\001\000\006\013" +
+    "\136\014\135\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\020\003\034\012" +
+    "\033\015\041\020\036\031\044\041\037\043\132\001\001" +
+    "\000\006\016\115\017\114\001\001\000\002\001\001\000" +
+    "\006\032\101\033\102\001\001\000\012\004\046\005\050" +
+    "\006\047\007\045\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\012\004\076" +
+    "\005\050\006\047\007\045\001\001\000\002\001\001\000" +
+    "\006\010\055\011\054\001\001\000\002\001\001\000\006" +
+    "\010\057\011\054\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\035\103\036\102\001\001\000\002\001\001\000\002" +
+    "\006\032\103\033\102\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\006\021\117\022\114\001\001\000" +
+    "\000\002\001\001\000\006\016\117\017\114\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\043\121\001\001\000\002\001\001\000\002\001\001\000" +
+    "\034\121\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\043\127\001\001\000\002\001\001\000\002\001\001\000" +
+    "\034\127\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\006\016\140\017\135\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\043\142" +
-    "\001\001\000\002\001\001\000\004\043\144\001\001\000" +
+    "\001\001\000\006\013\140\014\135\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\034\142" +
+    "\001\001\000\002\001\001\000\004\034\144\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\032\174\033\173\001\001\000\012\024\171\025\150\026" +
-    "\154\031\152\001\001\000\002\001\001\000\002\001\001" +
-    "\000\006\027\156\030\157\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\027\160\030\157" +
+    "\027\174\030\173\001\001\000\012\021\171\022\150\023" +
+    "\154\026\152\001\001\000\002\001\001\000\002\001\001" +
+    "\000\006\024\156\025\157\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\024\160\025\157" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\032\176\033\173" +
+    "\002\001\001\000\002\001\001\000\006\027\176\030\173" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\016\005\012\037\010" +
-    "\040\013\041\017\042\011\044\210\001\001\000\002\001" +
+    "\002\001\001\000\002\001\001\000\016\035\010\036\013" +
+    "\037\017\040\011\042\012\044\210\001\001\000\002\001" +
     "\001" });
 
   /** Access to <code>reduce_goto</code> table. */
@@ -312,6 +315,16 @@ class CUP$ScenariosParser$actions {
 		int attrsleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-3)).left;
 		int attrsright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-3)).right;
 		GenericElement attrs = (GenericElement)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-3)).value;
+		int elementsleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).left;
+		int elementsright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).right;
+		GenericElement elements = (GenericElement)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).value;
+		
+    RESULT = new Scenario();
+    RESULT.setName((String)attrs.getAttr("name").getValue());
+    RESULT.setHeight((Integer)attrs.getAttr("height").getValue());
+    RESULT.setWidth((Integer)attrs.getAttr("width").getValue());
+    RESULT.setBg((String)attrs.getAttr("bg").getValue());
+    RESULT.setElements(elements);
 
               CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario",35, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-4)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
@@ -321,7 +334,13 @@ class CUP$ScenariosParser$actions {
           case 4: // scenario_attrs ::= scenario_attr SEMICOLON 
             {
               GenericElement RESULT =null;
-
+		int attrleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).left;
+		int attrright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).right;
+		GenericAttr attr = (GenericAttr)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).value;
+		
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                
               CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attrs",34, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
@@ -330,7 +349,17 @@ class CUP$ScenariosParser$actions {
           case 5: // scenario_attrs ::= scenario_attr SEMICOLON scenario_attrs 
             {
               GenericElement RESULT =null;
-
+		int attrleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)).left;
+		int attrright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)).right;
+		GenericAttr attr = (GenericAttr)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)).value;
+		int attrsleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int attrsright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		GenericElement attrs = (GenericElement)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                    RESULT.addAll(attrs);
+                
               CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attrs",34, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
@@ -338,135 +367,226 @@ class CUP$ScenariosParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // scenario_attr ::= name 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int nleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("name");
+                    RESULT.setValue(n);
+                
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",32, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // scenario_attr ::= bg 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int bgleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int bgright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		String bg = (String)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("bg");
+                    RESULT.setValue(bg);
+                
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",32, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // scenario_attr ::= height 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int heightleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int heightright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Integer height = (Integer)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("height");
+                    RESULT.setValue(height);
+                
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",32, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // scenario_attr ::= width 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int widthleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int widthright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Integer width = (Integer)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                   RESULT = new GenericAttr<Integer>();
+                   RESULT.setType("width");
+                   RESULT.setValue(width);
+               
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_attr",32, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // name ::= NAME EQUAL ID 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("name",29, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              String RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		 RESULT = id; 
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("name",27, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // bg ::= BG EQUAL ID 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bg",30, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              String RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		 RESULT = id; 
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bg",28, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // height ::= HEIGHT EQUAL INT 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("height",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              Integer RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Integer i = (Integer)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		 RESULT = i; 
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("height",29, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // width ::= WIDTH EQUAL INT 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("width",32, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              Integer RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Integer i = (Integer)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		 RESULT = i; 
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("width",30, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // scenario_elements ::= scenario_element 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_elements",1, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericElement RESULT =null;
+		int elementleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int elementright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		GenericAttr element = (GenericAttr)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_elements",33, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // scenario_elements ::= scenario_element scenario_elements 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_elements",1, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericElement RESULT =null;
+		int elementleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).left;
+		int elementright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).right;
+		GenericAttr element = (GenericAttr)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)).value;
+		int elementsleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int elementsright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		GenericElement elements = (GenericElement)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_elements",33, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // scenario_element ::= characters 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int cleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Object c = (Object)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericAttr();
+                        RESULT.setType("characters");
+                        RESULT.setValue(c);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // scenario_element ::= walls 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int wleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int wright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Object w = (Object)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericAttr();
+                        RESULT.setType("walls");
+                        RESULT.setValue(w);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // scenario_element ::= floors 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int fleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int fright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Object f = (Object)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericAttr();
+                        RESULT.setType("floors");
+                        RESULT.setValue(f);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // scenario_element ::= extras 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericAttr();
+                        RESULT.setType("extras");
+                        RESULT.setValue(e);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // scenario_element ::= finish 
             {
-              Object RESULT =null;
-
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              GenericAttr RESULT =null;
+		int fleft = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).left;
+		int fright = ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()).right;
+		Object f = (Object)((java_cup.runtime.Symbol) CUP$ScenariosParser$stack.peek()).value;
+		
+                        RESULT = new GenericAttr();
+                        RESULT.setType("finish");
+                        RESULT.setValue(f);
+                    
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("scenario_element",31, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -475,7 +595,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters",4, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters",1, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -484,7 +604,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_elements",5, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_elements",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -493,7 +613,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_elements",5, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_elements",2, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -502,7 +622,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_element",6, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_element",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -511,7 +631,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_element",6, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("characters_element",3, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -520,7 +640,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("heroes",7, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-8)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("heroes",4, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-8)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -529,7 +649,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains",8, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains",5, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -538,7 +658,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_elements",9, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_elements",6, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -547,7 +667,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_elements",9, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_elements",6, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -556,7 +676,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_element",10, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("villains_element",7, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -565,7 +685,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls",11, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls",8, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -574,7 +694,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_elements",12, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_elements",9, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -583,7 +703,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_elements",12, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_elements",9, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -592,7 +712,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_element",13, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("walls_element",10, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -601,7 +721,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors",14, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors",11, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -610,7 +730,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_elements",15, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_elements",12, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -619,7 +739,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_elements",15, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_elements",12, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -628,7 +748,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_element",16, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("floors_element",13, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -637,7 +757,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras",17, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras",14, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -646,7 +766,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_elements",18, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_elements",15, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -655,7 +775,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_elements",18, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_elements",15, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -664,7 +784,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_element",19, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_element",16, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -673,7 +793,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_element",19, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_element",16, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -682,7 +802,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_weapons",20, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_weapons",17, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -691,7 +811,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_elements",21, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_elements",18, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -700,7 +820,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_elements",21, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_elements",18, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -709,7 +829,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_element",22, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("weapons_element",19, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -718,7 +838,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_bonus",23, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("extras_bonus",20, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -727,7 +847,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_elements",24, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_elements",21, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -736,7 +856,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_elements",24, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_elements",21, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -745,7 +865,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_element",25, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("bonus_element",22, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -754,7 +874,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish",26, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish",23, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-2)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -763,7 +883,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_elements",27, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_elements",24, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -772,7 +892,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_elements",27, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_elements",24, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-1)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -781,7 +901,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_element",28, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("finish_element",25, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-6)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -790,7 +910,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("int_range",33, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("int_range",26, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 
@@ -799,7 +919,7 @@ class CUP$ScenariosParser$actions {
             {
               Object RESULT =null;
 
-              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("int_range",33, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-3)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
+              CUP$ScenariosParser$result = parser.getSymbolFactory().newSymbol("int_range",26, ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.elementAt(CUP$ScenariosParser$top-3)), ((java_cup.runtime.Symbol)CUP$ScenariosParser$stack.peek()), RESULT);
             }
           return CUP$ScenariosParser$result;
 

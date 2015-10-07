@@ -3,6 +3,8 @@ package net.project.parser.scenarios;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import net.project.utils.Scenario;
+import net.project.utils.GenericAttr;
+import net.project.utils.GenericElement;
 
 parser code{:
     public ArrayList<Scenario> scenarios = new ArrayList<>();
@@ -46,18 +48,19 @@ terminal
     NAME,
     BG,
     HEIGHT,
-    WIDTH,
+    WIDTH
 
     // ER
-    ID,
-    INT
     ;
+
+terminal String
+    ID;
+
+terminal Integer
+    INT;
 
 non terminal
     scenarios,
-    scenario_elements,
-    scenario_element,
-    scenario_attr,
 
     characters,
     characters_elements,
@@ -86,15 +89,23 @@ non terminal
     finish_elements,
     finish_element,
 
-    name,
-    bg,
-    height,
-    width,
     int_range;
 
-//non terminal GenericAttr
+non terminal String
+    name,
+    bg;
+
+non terminal Integer
+    height,
+    width;
+
+non terminal GenericAttr
+    scenario_element,
+    scenario_attr;
+
 
 non terminal GenericElement
+    scenario_elements,
     scenario_attrs;
 
 non terminal Scenario
@@ -109,32 +120,89 @@ scenarios::= scenario:s{:
                 this.parser.scenarios.add(s);
             :};
 
-scenario::= INIT_SCENARIO scenario_attrs:attrs MORE_THAN scenario_elements END_SCENARIO;
+scenario::= INIT_SCENARIO scenario_attrs:attrs MORE_THAN scenario_elements:elements END_SCENARIO{:
+    RESULT = new Scenario();
+    RESULT.setName((String)attrs.getAttr("name").getValue());
+    RESULT.setHeight((Integer)attrs.getAttr("height").getValue());
+    RESULT.setWidth((Integer)attrs.getAttr("width").getValue());
+    RESULT.setBg((String)attrs.getAttr("bg").getValue());
+    RESULT.setElements(elements);
+:};
 
-scenario_attrs::= scenario_attr SEMICOLON
-                | scenario_attr SEMICOLON scenario_attrs;
+scenario_attrs::= scenario_attr:attr SEMICOLON{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                :}
+                | scenario_attr:attr SEMICOLON scenario_attrs:attrs{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(attr);
+                    RESULT.addAll(attrs);
+                :};
 
-scenario_attr::= name
-                | bg
-                | height
-                | width;
+scenario_attr::= name:n{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("name");
+                    RESULT.setValue(n);
+                :}
+                | bg:bg{:
+                    RESULT = new GenericAttr<String>();
+                    RESULT.setType("bg");
+                    RESULT.setValue(bg);
+                :}
+                | height:height{:
+                    RESULT = new GenericAttr<Integer>();
+                    RESULT.setType("height");
+                    RESULT.setValue(height);
+                :}
+                | width:width{:
+                   RESULT = new GenericAttr<Integer>();
+                   RESULT.setType("width");
+                   RESULT.setValue(width);
+               :};
 
-name::= NAME EQUAL ID;
+name::= NAME EQUAL ID:id{: RESULT = id; :};
 
-bg::= BG EQUAL ID;
+bg::= BG EQUAL ID:id{: RESULT = id; :};
 
-height::= HEIGHT EQUAL INT;
+height::= HEIGHT EQUAL INT:i{: RESULT = i; :};
 
-width::= WIDTH EQUAL INT;
+width::= WIDTH EQUAL INT:i{: RESULT = i; :};
 
-scenario_elements::= scenario_element
-                    | scenario_element scenario_elements;
+scenario_elements::= scenario_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | scenario_element:element scenario_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
 
-scenario_element::= characters
-                    | walls
-                    | floors
-                    | extras
-                    | finish;
+scenario_element::= characters:c{:
+                        RESULT = new GenericAttr();
+                        RESULT.setType("characters");
+                        RESULT.setValue(c);
+                    :}
+                    | walls:w{:
+                        RESULT = new GenericAttr();
+                        RESULT.setType("walls");
+                        RESULT.setValue(w);
+                    :}
+                    | floors:f{:
+                        RESULT = new GenericAttr();
+                        RESULT.setType("floors");
+                        RESULT.setValue(f);
+                    :}
+                    | extras:e{:
+                        RESULT = new GenericAttr();
+                        RESULT.setType("extras");
+                        RESULT.setValue(e);
+                    :}
+                    | finish:f{:
+                        RESULT = new GenericAttr();
+                        RESULT.setType("finish");
+                        RESULT.setValue(f);
+                    :};
 
 characters::= INIT_CHARACTERS characters_elements END_CHARACTERS;
 
