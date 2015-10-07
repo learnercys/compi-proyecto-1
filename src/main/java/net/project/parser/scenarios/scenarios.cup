@@ -62,13 +62,6 @@ terminal Integer
 non terminal
     scenarios,
 
-    characters,
-    characters_elements,
-    characters_element,
-    heroes,
-    villains,
-    villains_elements,
-    villains_element,
 
     walls,
     walls_elements,
@@ -101,12 +94,19 @@ non terminal Integer
 
 non terminal GenericAttr
     scenario_element,
-    scenario_attr;
+    scenario_attr,
+    characters_element,
+    villains_element;
 
 
 non terminal GenericElement
     scenario_elements,
-    scenario_attrs;
+    scenario_attrs,
+    characters,
+    characters_elements,
+    heroes,
+    villains,
+    villains_elements;
 
 non terminal Scenario
     scenario;
@@ -179,7 +179,7 @@ scenario_elements::= scenario_element:element{:
                     :};
 
 scenario_element::= characters:c{:
-                        RESULT = new GenericAttr();
+                        RESULT = new GenericAttr<GenericElement>();
                         RESULT.setType("characters");
                         RESULT.setValue(c);
                     :}
@@ -204,22 +204,87 @@ scenario_element::= characters:c{:
                         RESULT.setValue(f);
                     :};
 
-characters::= INIT_CHARACTERS characters_elements END_CHARACTERS;
+characters::= INIT_CHARACTERS characters_elements:elements END_CHARACTERS{:
+    RESULT = elements;
+:};
 
-characters_elements::= characters_element
-                        | characters_element characters_elements;
+characters_elements::= characters_element:element{:
+                            RESULT = new GenericElement();
+                            RESULT.addAttr(element);
+                        :}
+                        | characters_element:element characters_elements:elements{:
+                            RESULT = new GenericElement();
+                            RESULT.addAttr(element);
+                            RESULT.addAll(elements);
+                        :};
 
-characters_element::= heroes
-                        | villains;
+characters_element::= heroes:h{:
+                            RESULT = new GenericAttr();
+                            RESULT.setType("hero");
+                            RESULT.setValue(h);
+                        :}
+                        | villains:v{:
+                            RESULT = new GenericAttr();
+                            RESULT.setType("villains");
+                            RESULT.setValue(v);
+                        :};
 
-heroes::= INIT_HEROES ID O_PAREN INT COMMA INT C_PAREN SEMICOLON END_HEROES;
+heroes::= INIT_HEROES ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON END_HEROES{:
+    RESULT = new GenericElement();
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    RESULT.addAttr(n);
 
-villains::= INIT_VILLAINS villains_elements END_VILLAINS;
+    GenericAttr<Integer> tmpY = new GenericAttr<>();
+    tmpY.setType("y");
+    tmpY.setValue(y);
+    RESULT.addAttr(tmpY);
 
-villains_elements::= villains_element
-                    | villains_element villains_elements;
+    GenericAttr<Integer> tmpX = new GenericAttr<>();
+    tmpX.setType("x");
+    tmpX.setValue(x);
+    RESULT.addAttr(tmpX);
+:};
 
-villains_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+villains::= INIT_VILLAINS villains_elements:elements END_VILLAINS{:
+    RESULT = elements;
+:};
+
+villains_elements::= villains_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | villains_element:element villains_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
+
+villains_element::= ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("villain"); // unnecessary, I'm boring
+
+    GenericElement villain = new GenericElement();
+
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    villain.addAttr(n);
+
+    GenericAttr<Integer> tmpY = new GenericAttr<>();
+    tmpY.setType("y");
+    tmpY.setValue(y);
+    villain.addAttr(tmpY);
+
+    GenericAttr<Integer> tmpX = new GenericAttr<>();
+    tmpX.setType("x");
+    tmpX.setValue(x);
+    villain.addAttr(tmpX);
+
+    RESULT.setValue(villain);
+
+:};
 
 walls::= INIT_WALLS walls_elements END_WALLS;
 
