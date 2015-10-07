@@ -217,6 +217,11 @@ public class MainCtrl implements Initializable {
             // todo show error, cannot compile empty files
             return;
         }
+        if(this.scenariosErrors) {
+            // todo send a warning, cannot compile if the scenarios has errors
+            showErrors();
+            return;
+        }
 
         // TODO verify structures and scenarios
 
@@ -234,8 +239,10 @@ public class MainCtrl implements Initializable {
             if ( !lErrors.isEmpty() || !sErrors.isEmpty()) {
                 tabSequences.setDisable(true);
                 this.showErrors();
+                this.sequencesErrors = true;
             } else {
                 tabSequences.setDisable(false);
+                this.sequencesErrors = false;
             }
         } catch (Exception e) {
             // TODO the world is null
