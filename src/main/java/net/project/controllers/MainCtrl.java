@@ -13,6 +13,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.project.components.CustomCodeArea;
+import net.project.components.ScenariosContainer;
+import net.project.components.SequencesContainer;
 import net.project.components.StructuresContainer;
 import net.project.parser.scenarios.ScenariosParser;
 import net.project.parser.sequences.SequencesParser;
@@ -40,6 +42,8 @@ public class MainCtrl implements Initializable {
     @FXML BorderPane root;
     @FXML BorderPane ccAreaContainer;
     @FXML StructuresContainer stc;
+    @FXML ScenariosContainer scc;
+    @FXML SequencesContainer sqc;
     @FXML Tab tabStructures;
     @FXML Tab tabScenarios;
     @FXML Tab tabSequences;
