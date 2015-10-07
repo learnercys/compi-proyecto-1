@@ -201,6 +201,7 @@ public class MainCtrl implements Initializable {
                 this.scenariosErrors = true;
             } else {
                 tabScenarios.setDisable(false);
+                this.scc.setScenarios(scenariosParser.scenarios);
                 this.scenariosErrors = false;
             }
         } catch (Exception e) {
@@ -242,6 +243,7 @@ public class MainCtrl implements Initializable {
                 this.sequencesErrors = true;
             } else {
                 tabSequences.setDisable(false);
+                sqc.setSequences(sequencesParser.sequences);
                 this.sequencesErrors = false;
             }
         } catch (Exception e) {
