@@ -18,11 +18,18 @@ import net.project.parser.sequences.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     public Symbol symbol(int type) {
+        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn, yytext());
     }
 
     public Symbol symbol(int type, Object value) {
+        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn);
+    }
+
+    public Symbol intSymbol(int type) {
+        System.out.println( yytext() );
+        return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 %}
 
@@ -61,7 +68,7 @@ ID = [a-zA-Z][a-zA-Z0-9_]+
 
 // ER
 {ID} { return symbol(sym.ID); }
-[:digit:]+ { return symbol(sym.INT); }
+[:digit:]+ { return intSymbol(sym.INT); }
 
 [ \n\t\f]   { /* white space */}
 
