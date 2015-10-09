@@ -11,6 +11,7 @@ public class GenericAttr<T> {
         return type;
     }
 
+    @SuppressWarnings("unchecked")
     public T getValue() {
         return value;
     }

@@ -48,14 +48,72 @@ public class Scenario {
 
     public void setElements(GenericElement elements) {
         // todo set the elements
-        /*for(GenericAttr attr: elements.getAttrs()) {
+        for(GenericAttr attr: elements.getAttrs()) {
             // todo set the elements
+            //System.out.println(attr.getType());
             switch (attr.getType()) {
                 case "characters":
-                    this.hero = (GenericElement)((GenericElement)attr.getValue()).getAttr("hero").getValue();
-                    this.villains.addAll((ArrayList<GenericElement>)((GenericElement)attr.getValue()).getAttr("hero").getValue());
+                    GenericElement characters = (GenericElement)attr.getValue();
+                    for(GenericAttr cAttr: characters.getAttrs()){
+                        switch (cAttr.getType()) {
+                            case "villains":
+                                GenericElement villains = (GenericElement)cAttr.getValue();
+                                for(GenericAttr vAttr: villains.getAttrs()){
+                                    this.villains.add((GenericElement)vAttr.getValue());
+                                }
+                                break;
+
+                            case "hero":
+                                this.hero = (GenericElement)cAttr.getValue();
+                                break;
+                        }
+                    }
                     break;
+
+                case "walls":
+                    GenericElement walls = (GenericElement)attr.getValue();
+                    for(GenericAttr wAttr: walls.getAttrs()){
+                        this.walls.add((GenericElement)wAttr.getValue());
+                    }
+                    break;
+
+                case "floors":
+                    GenericElement floors = (GenericElement)attr.getValue();
+                    for(GenericAttr fAttr: floors.getAttrs()){
+                        this.floors.add((GenericElement)fAttr.getValue());
+                    }
+                    break;
+
+                case "extras":
+                    GenericElement extras = (GenericElement)attr.getValue();
+                    for(GenericAttr eAttr: extras.getAttrs()){
+                        switch (eAttr.getType()){
+                            case "weapons":
+                                GenericElement weapons = (GenericElement)eAttr.getValue();
+                                for(GenericAttr wAttr: weapons.getAttrs()) {
+                                    this.weapons.add((GenericElement)wAttr.getValue());
+                                }
+                                break;
+
+                            case "bonus":
+                                GenericElement bonus = (GenericElement)eAttr.getValue();
+                                for(GenericAttr wAttr: bonus.getAttrs()) {
+                                    this.bonus.add((GenericElement)wAttr.getValue());
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case "finish":
+                    GenericElement finish = (GenericElement)attr.getValue();
+                    for(GenericAttr fAttr: finish.getAttrs()){
+                        this.finish = (GenericElement)fAttr.getValue();
+                    }
+
+                    break;
+
             }
-        }*/
+        }
     }
 }

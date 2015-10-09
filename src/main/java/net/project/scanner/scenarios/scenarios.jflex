@@ -18,17 +18,14 @@ import net.project.parser.scenarios.sym;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     private Symbol symbol(int type) {
-        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn, yytext());
     }
 
     private Symbol symbol(int type, String value) {
-        System.out.println( value );
         return new Symbol(type, yyline, yycolumn, value);
     }
 
     private Symbol intSymbol(int type) {
-        System.out.println(Integer.parseInt(yytext()));
         return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 %}
