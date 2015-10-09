@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -222,6 +223,7 @@ public class MainCtrl implements Initializable {
                 stc.setStr(structuresParser.bgs, structuresParser.figures, structuresParser.designs);
                 tabStructures.setDisable(false);
                 this.structuresErrors = false;
+                compilationSuccess();
             }
 
         } catch (Exception e ) {
@@ -265,6 +267,7 @@ public class MainCtrl implements Initializable {
                 tabScenarios.setDisable(false);
                 this.scc.setScenarios(scenariosParser.scenarios);
                 this.scenariosErrors = false;
+                compilationSuccess();
             }
         } catch (Exception e) {
             // todo: reading error or something
@@ -307,6 +310,7 @@ public class MainCtrl implements Initializable {
                 tabSequences.setDisable(false);
                 sqc.setSequences(sequencesParser.sequences);
                 this.sequencesErrors = false;
+                compilationSuccess();
             }
         } catch (Exception e) {
             // TODO the world is null
@@ -373,6 +377,14 @@ public class MainCtrl implements Initializable {
         }
     }
 
+    public void compilationSuccess() {
+        Alert errorModal = new Alert(Alert.AlertType.INFORMATION);
+        errorModal.setTitle("Compilación Finalizada");
+        errorModal.setHeaderText("Compilación");
+        errorModal.setContentText("La compilación se ha finalizado con éxito");
+        errorModal.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // injecting the code area.
@@ -386,6 +398,6 @@ public class MainCtrl implements Initializable {
     }
 
     private class SymbolsTable {
-
+        public ArrayList<HashMap<String,String>> symbols = new ArrayList<>();
     }
 }
