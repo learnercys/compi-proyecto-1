@@ -3,9 +3,11 @@ package net.project.parser.scenarios;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.awt.Point;
 import net.project.utils.Scenario;
 import net.project.utils.GenericAttr;
 import net.project.utils.GenericElement;
+import net.project.utils.Point2D;
 
 parser code{:
     public boolean hasUnRecoveredSyntaxError = false;
@@ -13,7 +15,6 @@ parser code{:
     public ArrayList<Scenario> scenarios = new ArrayList<>();
 :}
 
-// single chars
 terminal
 
     // tags
@@ -63,29 +64,7 @@ terminal Integer
     INT;
 
 non terminal
-    scenarios,
-
-
-    walls,
-    walls_elements,
-    walls_element,
-    floors,
-    floors_elements,
-    floors_element,
-    extras,
-    extras_elements,
-    extras_element,
-    extras_weapons,
-    weapons_elements,
-    weapons_element,
-    extras_bonus,
-    bonus_elements,
-    bonus_element,
-    finish,
-    finish_elements,
-    finish_element,
-
-    int_range;
+    scenarios;
 
 non terminal String
     name,
@@ -99,7 +78,13 @@ non terminal GenericAttr
     scenario_element,
     scenario_attr,
     characters_element,
-    villains_element;
+    villains_element,
+    walls_element,
+    floors_element,
+    extras_element,
+    weapons_element,
+    bonus_element,
+    finish_element;
 
 
 non terminal GenericElement
@@ -109,18 +94,36 @@ non terminal GenericElement
     characters_elements,
     heroes,
     villains,
-    villains_elements;
+    villains_elements,
+
+    walls,
+    walls_elements,
+    floors,
+    floors_elements,
+    extras,
+    extras_elements,
+    extras_weapons,
+    weapons_elements,
+    extras_bonus,
+    bonus_elements,
+    finish,
+    finish_elements;
 
 non terminal Scenario
     scenario;
+
+non terminal Point
+    int_range;
 
 start with scenarios;
 
 scenarios::= scenario:s{:
                 this.parser.scenarios.add(s);
+                System.out.println("add scenario");
             :}
             | scenario:s scenarios{:
                 this.parser.scenarios.add(s);
+                System.out.println("add scenario");
             :};
 
 scenario::= INIT_SCENARIO scenario_attrs:attrs MORE_THAN scenario_elements:elements END_SCENARIO{:
@@ -187,22 +190,22 @@ scenario_element::= characters:c{:
                         RESULT.setValue(c);
                     :}
                     | walls:w{:
-                        RESULT = new GenericAttr();
+                        RESULT = new GenericAttr<GenericElement>();
                         RESULT.setType("walls");
                         RESULT.setValue(w);
                     :}
                     | floors:f{:
-                        RESULT = new GenericAttr();
+                        RESULT = new GenericAttr<GenericElement>();
                         RESULT.setType("floors");
                         RESULT.setValue(f);
                     :}
                     | extras:e{:
-                        RESULT = new GenericAttr();
+                        RESULT = new GenericAttr<GenericElement>();
                         RESULT.setType("extras");
                         RESULT.setValue(e);
                     :}
                     | finish:f{:
-                        RESULT = new GenericAttr();
+                        RESULT = new GenericAttr<GenericElement>();
                         RESULT.setType("finish");
                         RESULT.setValue(f);
                     :};
@@ -222,12 +225,12 @@ characters_elements::= characters_element:element{:
                         :};
 
 characters_element::= heroes:h{:
-                            RESULT = new GenericAttr();
+                            RESULT = new GenericAttr<GenericElement>();
                             RESULT.setType("hero");
                             RESULT.setValue(h);
                         :}
                         | villains:v{:
-                            RESULT = new GenericAttr();
+                            RESULT = new GenericAttr<GenericElement>();
                             RESULT.setType("villains");
                             RESULT.setValue(v);
                         :};
@@ -289,49 +292,219 @@ villains_element::= ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON{:
 
 :};
 
-walls::= INIT_WALLS walls_elements END_WALLS;
+walls::= INIT_WALLS walls_elements:elements END_WALLS{:
+    RESULT = elements;
+:};
 
-walls_elements::= walls_element
-                | walls_element walls_elements;
+walls_elements::= walls_element:element{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(element);
+                :}
+                | walls_element:element walls_elements:elements{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(element);
+                    RESULT.addAll(elements);
+                :};
 
-walls_element::= ID O_PAREN int_range COMMA int_range C_PAREN SEMICOLON;
+walls_element::= ID:name O_PAREN int_range:rangeX COMMA int_range:rangeY C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("wall");
 
-floors::= INIT_FLOOR floors_elements END_FLOOR;
+    GenericElement wall = new GenericElement();
 
-floors_elements::= floors_element
-                    | floors_element floors_elements;
+    // set the name
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    wall.addAttr(n);
 
-floors_element::= ID O_PAREN int_range COMMA int_range C_PAREN SEMICOLON;
+    // set the range
+    GenericAttr<Point2D> p = new GenericAttr<>();
+    p.setType("range");
+    p.setValue(new Point2D((int)rangeX.getX(), (int)rangeX.getY(), (int)rangeY.getX(), (int)rangeY.getY()));
+    wall.addAttr(p);
 
-extras::= INIT_EXTRAS extras_elements END_EXTRAS;
+    RESULT.setValue(wall);
 
-extras_elements::= extras_element
-                    | extras_element extras_elements;
+:};
 
-extras_element::= extras_weapons
-                    | extras_bonus;
+floors::= INIT_FLOOR floors_elements:elements END_FLOOR{:
+    RESULT = elements;
+:};
 
-extras_weapons::= INIT_WEAPONS weapons_elements END_WEAPONS;
+floors_elements::= floors_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | floors_element:element floors_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
 
-weapons_elements::= weapons_element
-                    | weapons_element weapons_elements;
+floors_element::= ID:name O_PAREN int_range:rangeX COMMA int_range:rangeY C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("floor");
 
-weapons_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+    GenericElement floor = new GenericElement();
 
-extras_bonus::= INIT_BONUS bonus_elements END_BONUS;
+    // set the name
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    floor.addAttr(n);
 
-bonus_elements::= bonus_element
-                | bonus_element bonus_elements;
+    // set the range
+    GenericAttr<Point2D> p = new GenericAttr<>();
+    p.setType("range");
+    p.setValue(new Point2D((int)rangeX.getX(), (int)rangeX.getY(), (int)rangeY.getX(), (int)rangeY.getY()));
+    floor.addAttr(p);
 
-bonus_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+    RESULT.setValue(floor);
+:};
 
-finish::= INIT_FINISH finish_elements END_FINISH;
+extras::= INIT_EXTRAS extras_elements:elements END_EXTRAS{:
+    RESULT =    elements;
+:};
 
-finish_elements::= finish_element
-                    | finish_element finish_elements;
+extras_elements::= extras_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | extras_element:element extras_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
 
-finish_element::= ID O_PAREN INT COMMA INT C_PAREN SEMICOLON;
+extras_element::= extras_weapons:w{:
+                        RESULT = new GenericAttr<GenericElement>();
+                        RESULT.setType("weapons");
+                        RESULT.setValue(w);
+                    :}
+                    | extras_bonus:b{:
+                        RESULT = new GenericAttr<GenericElement>();
+                        RESULT.setType("bonus");
+                        RESULT.setValue(b);
+                    :};
 
-int_range::= INT
-            | INT DOT DOT INT;
+extras_weapons::= INIT_WEAPONS weapons_elements:elements END_WEAPONS{:
+    RESULT = elements;
+:};
 
+weapons_elements::= weapons_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | weapons_element:element weapons_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
+
+weapons_element::= ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("weapon"); // unnecessary, I'm boring
+
+    GenericElement weapon = new GenericElement();
+
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    weapon.addAttr(n);
+
+    GenericAttr<Integer> tmpY = new GenericAttr<>();
+    tmpY.setType("y");
+    tmpY.setValue(y);
+    weapon.addAttr(tmpY);
+
+    GenericAttr<Integer> tmpX = new GenericAttr<>();
+    tmpX.setType("x");
+    tmpX.setValue(x);
+    weapon.addAttr(tmpX);
+
+    RESULT.setValue(weapon);
+:};
+
+extras_bonus::= INIT_BONUS bonus_elements:elements END_BONUS{:
+    RESULT = elements;
+:};
+
+bonus_elements::= bonus_element:element{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(element);
+                :}
+                | bonus_element:element bonus_elements:elements{:
+                    RESULT = new GenericElement();
+                    RESULT.addAttr(element);
+                    RESULT.addAll(elements);
+                :};
+
+bonus_element::= ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("bonus"); // unnecessary, I'm boring
+
+    GenericElement bonus = new GenericElement();
+
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    bonus.addAttr(n);
+
+    GenericAttr<Integer> tmpY = new GenericAttr<>();
+    tmpY.setType("y");
+    tmpY.setValue(y);
+    bonus.addAttr(tmpY);
+
+    GenericAttr<Integer> tmpX = new GenericAttr<>();
+    tmpX.setType("x");
+    tmpX.setValue(x);
+    bonus.addAttr(tmpX);
+
+    RESULT.setValue(bonus);
+:};
+
+finish::= INIT_FINISH finish_elements:elements END_FINISH{:
+    RESULT = elements;
+:};
+
+finish_elements::= finish_element:element{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                    :}
+                    | finish_element:element finish_elements:elements{:
+                        RESULT = new GenericElement();
+                        RESULT.addAttr(element);
+                        RESULT.addAll(elements);
+                    :};
+
+finish_element::= ID:name O_PAREN INT:x COMMA INT:y C_PAREN SEMICOLON{:
+    RESULT = new GenericAttr<GenericElement>();
+    RESULT.setType("finish"); // unnecessary, I'm boring
+
+    GenericElement finish = new GenericElement();
+
+    GenericAttr<String> n = new GenericAttr<>();
+    n.setType("name");
+    n.setValue(name);
+    finish.addAttr(n);
+
+    GenericAttr<Integer> tmpY = new GenericAttr<>();
+    tmpY.setType("y");
+    tmpY.setValue(y);
+    finish.addAttr(tmpY);
+
+    GenericAttr<Integer> tmpX = new GenericAttr<>();
+    tmpX.setType("x");
+    tmpX.setValue(x);
+    finish.addAttr(tmpX);
+
+    RESULT.setValue(finish);
+:};
+
+int_range::= INT:i{:
+                RESULT = new Point(i,i);
+            :}
+            | INT:x DOT DOT INT:y{:
+                RESULT = new Point(x,y);
+            :};

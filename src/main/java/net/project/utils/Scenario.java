@@ -47,7 +47,8 @@ public class Scenario {
     }
 
     public void setElements(GenericElement elements) {
-        for(GenericAttr attr: elements.getAttrs()) {
+        // todo set the elements
+        /*for(GenericAttr attr: elements.getAttrs()) {
             // todo set the elements
             switch (attr.getType()) {
                 case "characters":
@@ -55,6 +56,6 @@ public class Scenario {
                     this.villains.addAll((ArrayList<GenericElement>)((GenericElement)attr.getValue()).getAttr("hero").getValue());
                     break;
             }
-        }
+        }*/
     }
 }

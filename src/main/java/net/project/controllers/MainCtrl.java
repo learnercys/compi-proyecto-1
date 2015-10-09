@@ -71,8 +71,6 @@ public class MainCtrl implements Initializable {
         } catch (IOException ioe) {
             //
         }
-
-
     }
 
     /**
@@ -163,7 +161,7 @@ public class MainCtrl implements Initializable {
             techCtrl.initData("", "Manual técnico");
             tech.show();
         } catch (Exception e) {
-            // todo a lot of exeptions
+            // todo a lot of exceptions
         }
     }
 
@@ -184,7 +182,7 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO create a new File
+     * create a new File
      */
     public void newFile() {
         ccArea.setFile(null);
