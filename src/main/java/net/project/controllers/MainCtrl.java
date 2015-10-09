@@ -75,10 +75,17 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO show the about us modal
+     * how the about us modal
      */
     public void showAboutUs() {
-
+        try {
+            Stage about = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("aboutctrl.fxml"));
+            about.setScene(new Scene(loader.load()));
+            about.show();
+        } catch (IOException ioe) {
+            //
+        }
     }
 
     /**
