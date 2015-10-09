@@ -151,17 +151,35 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO Show the technical manual
+     * Show the technical manual
      */
     public void showTechnicalManual() {
-
+        try {
+            Stage tech = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("htmlctrl.fxml"));
+            tech.setScene(new Scene(loader.load()));
+            HTMLCtrl techCtrl = loader.getController();
+            techCtrl.initData("", "Manual técnico");
+            tech.show();
+        } catch (Exception e) {
+            // todo a lot of exeptions
+        }
     }
 
     /**
-     * TODO show the user manual
+     * show the user manual
      */
     public void showUserManual() {
-
+        try {
+            Stage userManual = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("htmlctrl.fxml"));
+            userManual.setScene(new Scene(loader.load()));
+            HTMLCtrl userManualCtrl = loader.getController();
+            userManualCtrl.initData("", "Manual de usuario");
+            userManual.show();
+        } catch (Exception e) {
+            // todo file errors
+        }
     }
 
     /**
