@@ -24,10 +24,7 @@ import net.project.scanner.sequences.SequencesScanner;
 import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
 
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.StringReader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,9 +57,20 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO execute the game
+     * execute the game
      */
     public void executeGame() {
+        try {
+            Stage game = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gamectrl.fxml"));
+            game.setScene(new Scene(loader.load()));
+            GameCtrl gameCtrl = loader.getController();
+            gameCtrl.initData();
+            game.show();
+        } catch (IOException ioe) {
+            //
+        }
+
 
     }
 
