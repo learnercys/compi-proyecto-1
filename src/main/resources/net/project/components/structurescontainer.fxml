@@ -4,6 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
 <fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@../fxml/css/styles.css" />
@@ -13,14 +14,14 @@
             <children>
                 <Label styleClass="h1" text="Fondos" />
             </children>
-            <HBox>
+            <HBox alignment="CENTER">
                 <Label text="Nombre:"/>
                 <Label fx:id="bgName"/>
             </HBox>
-            <ImageView fx:id="bgImage"/>
-            <HBox>
-                <Button>Anterior</Button>
-                <Button>Siguiente</Button>
+            <FlowPane fx:id="bgCanvasContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
+            <HBox alignment="CENTER">
+                <Button fx:id="prevBGButton">Anterior</Button>
+                <Button fx:id="nextBGButton">Siguiente</Button>
             </HBox>
         </VBox>
     </left>
@@ -29,13 +30,32 @@
             <children>
                 <Label styleClass="h1" text="Figuras" />
             </children>
-            <HBox>
-                <Label text="Nombre:"/>
-                <Label fx:id="fgName"/>
-            </HBox>
-            <HBox>
-                <Button>Anterior</Button>
-                <Button>Siguiente</Button>
+            <VBox alignment="CENTER">
+                <HBox alignment="CENTER">
+                    <Label text="Nombre:"/>
+                    <Label fx:id="fgName"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Vida:"/>
+                    <Label fx:id="fgLive"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Tipo:"/>
+                    <Label fx:id="fgType"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Destruir:"/>
+                    <Label fx:id="fgDestroy"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Descripción:"/>
+                    <Label fx:id="fgDescription"/>
+                </HBox>
+            </VBox>
+            <FlowPane fx:id="fgCanvasContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
+            <HBox alignment="CENTER">
+                <Button fx:id="prevFGButton">Anterior</Button>
+                <Button fx:id="nextFGButton">Siguiente</Button>
             </HBox>
         </VBox>
     </center>
@@ -44,13 +64,28 @@
             <children>
                 <Label styleClass="h1" text="Diseños" />
             </children>
-            <HBox>
-                <Label text="Nombre:"/>
-                <Label fx:id="dgName"/>
-            </HBox>
-            <HBox>
-                <Button>Anterior</Button>
-                <Button>Siguiente</Button>
+            <VBox alignment="CENTER">
+                <HBox alignment="CENTER">
+                    <Label text="Nombre:"/>
+                    <Label fx:id="dgName"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Tipo:"/>
+                    <Label fx:id="dgType"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Creditos:"/>
+                    <Label fx:id="dgCredits"/>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Label text="Destruir:"/>
+                    <Label fx:id="dgDestroy"/>
+                </HBox>
+            </VBox>
+            <FlowPane fx:id="dgCanvasContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
+            <HBox alignment="CENTER">
+                <Button fx:id="prevDGButton">Anterior</Button>
+                <Button fx:id="nextDGButton">Siguiente</Button>
             </HBox>
         </VBox>
     </right>

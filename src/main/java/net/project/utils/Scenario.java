@@ -46,11 +46,12 @@ public class Scenario {
         this.bg = bg;
     }
 
+    /**
+     * Set the elements to the current scenario
+     * @param elements the new elements.
+     */
     public void setElements(GenericElement elements) {
-        // todo set the elements
         for(GenericAttr attr: elements.getAttrs()) {
-            // todo set the elements
-            //System.out.println(attr.getType());
             switch (attr.getType()) {
                 case "characters":
                     GenericElement characters = (GenericElement)attr.getValue();

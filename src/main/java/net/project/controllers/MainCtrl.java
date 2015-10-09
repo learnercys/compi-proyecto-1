@@ -383,6 +383,14 @@ public class MainCtrl implements Initializable {
         errorModal.show();
     }
 
+    public void Success(String title, String text, String contentText) {
+        Alert s = new Alert(Alert.AlertType.CONFIRMATION);
+        s.setTitle(title);
+        s.setHeaderText(text);
+        s.setContentText(contentText);
+        s.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // injecting the code area.
