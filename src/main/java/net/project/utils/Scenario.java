@@ -30,6 +30,22 @@ public class Scenario {
         bonus = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public String getBg() {
+        return bg;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

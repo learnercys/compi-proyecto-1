@@ -173,6 +173,18 @@ public class StructuresContainer extends BorderPane implements Initializable{
         setDesigns(designs);
     }
 
+    public ArrayList<GenericElement> getBgs() {
+        return bgs;
+    }
+
+    public ArrayList<GenericElement> getFigures() {
+        return figures;
+    }
+
+    public ArrayList<GenericElement> getDesigns() {
+        return designs;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // canvas background

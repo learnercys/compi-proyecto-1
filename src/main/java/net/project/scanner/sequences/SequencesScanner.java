@@ -265,17 +265,14 @@ public class SequencesScanner implements java_cup.runtime.Scanner {
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
 
     public Symbol symbol(int type) {
-        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn, yytext());
     }
 
     public Symbol symbol(int type, Object value) {
-        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn);
     }
 
     public Symbol intSymbol(int type) {
-        System.out.println( yytext() );
         return new Symbol(type, yyline, yycolumn, Integer.parseInt(yytext()));
     }
 

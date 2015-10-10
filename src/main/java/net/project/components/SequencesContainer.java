@@ -38,6 +38,10 @@ public class SequencesContainer extends BorderPane{
         showSequences();
     }
 
+    public ArrayList<GenericElement> getSequences() {
+        return sequences;
+    }
+
     private void showSequences() {
         sequencesContainer.getChildren().removeAll();
 

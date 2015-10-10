@@ -1,7 +1,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
+<?import net.project.components.GameContainer?>
+<?import javafx.scene.control.Button?>
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.project.controllers.GameCtrl">
     <top>
         <HBox>
@@ -9,9 +10,10 @@
             <Label text="Vida" fx:id="liveLabel"/>
             <Label text="Armas"/>
             <Label text="Armas" fx:id="weaponsLabel"/>
+            <Button onAction="#playGame">Play</Button>
         </HBox>
     </top>
     <center>
-        <GridPane fx:id="gameContainer"></GridPane>
+        <GameContainer fx:id="gameContainer"/>
     </center>
 </BorderPane>

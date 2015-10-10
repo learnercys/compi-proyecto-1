@@ -48,7 +48,22 @@ sequences_elements::= sequences_element
                     | sequences_element sequences_elements;
 
 sequences_element::= INIT_SCENARIO scenario_attrs:sequence MORE_THAN_S{:
-    this.parser.sequences.add(sequence);
+    if(this.parser.sequences.size() == 0) {
+        this.parser.sequences.add(sequence);
+    } else {
+        for(int index = 0; index < this.parser.sequences.size(); index++){
+            GenericElement s = this.parser.sequences.get(index);
+            if( (Integer)s.getAttr("order").getValue() > (Integer)sequence.getAttr("order").getValue()) {
+              this.parser.sequences.add(index, sequence);
+              break;
+            } else {
+                if(index == this.parser.sequences.size()){
+                    this.parser.sequences.add(sequence);
+                  break;
+                }
+            }
+        }
+    }
 :};
 
 scenario_attrs::= scenario_attr:attr SEMICOLON{:

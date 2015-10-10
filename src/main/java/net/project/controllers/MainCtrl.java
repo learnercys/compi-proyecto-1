@@ -61,12 +61,28 @@ public class MainCtrl implements Initializable {
      * execute the game
      */
     public void executeGame() {
+        if(
+                stc.getBgs().size() == 0
+                || stc.getFigures().size() == 0
+                || stc.getDesigns().size() == 0
+                || scc.getScenarios().size() == 0
+                || sqc.getSequences().size() == 0
+                ){
+            return;
+        }
+
         try {
             Stage game = new Stage(StageStyle.DECORATED);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gamectrl.fxml"));
             game.setScene(new Scene(loader.load()));
             GameCtrl gameCtrl = loader.getController();
-            gameCtrl.initData();
+            gameCtrl.initData(
+                    stc.getBgs(),
+                    stc.getFigures(),
+                    stc.getDesigns(),
+                    scc.getScenarios(),
+                    sqc.getSequences());
+            game.getScene().setOnKeyPressed(event -> gameCtrl.keyPressed(event.getCode().toString()));
             game.show();
         } catch (IOException ioe) {
             //
