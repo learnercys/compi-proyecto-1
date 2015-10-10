@@ -66,14 +66,67 @@ public class GameContainer extends BorderPane implements Initializable{
         showWalls();
         showVillains();
         showHero();
+        showWeapons();
+        showBonus();
+        showFinish();
+        showFloors();
     }
 
     private void drawImage(double x, double y, double w, double h, String path) {
-        System.out.println(x + " " + y + " " + w + " " + h + " " + path);
+        //System.out.println(x + " " + y + " " + w + " " + h + " " + path);
         try {
             gc.drawImage(new Image(path), x, y, w, h);
         } catch (Exception e){
             //
+        }
+    }
+
+    private void showFinish(){
+        GenericElement finish = this.scenario.getFinish();
+        String hName = finish.getAttr("name").getValue().toString();
+        System.out.println(hName);
+        Integer x = ((Integer) finish.getAttr("x").getValue());
+        Integer y = ((Integer) finish.getAttr("y").getValue());
+        String path = "";
+        for(GenericElement dg: this.dgs){
+            if(hName.equals(dg.getAttr("name").getValue())){
+                path = new File((String)dg.getAttr("picture").getValue()).toURI().toString();
+            }
+        }
+        drawImage(x * wElement, y * hElement, wElement, hElement, path);
+    }
+
+    private void showBonus(){
+        for(GenericElement bonus: this.scenario.getBonus()){
+            String wName = bonus.getAttr("name").getValue().toString();
+            Integer x = ((Integer) bonus.getAttr("x").getValue());
+            Integer y = ((Integer) bonus.getAttr("y").getValue());
+
+            String path = "";
+            for(GenericElement dg: this.dgs){
+                if(wName.equals(dg.getAttr("name").getValue())){
+                    path = new File(((String) dg.getAttr("picture").getValue())).toURI().toString();
+                }
+            }
+
+            drawImage(x * wElement, y * hElement, wElement, hElement, path);
+        }
+    }
+
+    private void showWeapons(){
+        for(GenericElement weapon: this.scenario.getWeapons()){
+            String wName = weapon.getAttr("name").getValue().toString();
+            Integer x = ((Integer) weapon.getAttr("x").getValue());
+            Integer y = ((Integer) weapon.getAttr("y").getValue());
+
+            String path = "";
+            for(GenericElement dg: this.dgs){
+                if(wName.equals(dg.getAttr("name").getValue())){
+                    path = new File(((String) dg.getAttr("picture").getValue())).toURI().toString();
+                }
+            }
+
+            drawImage(x * wElement, y * hElement, wElement, hElement, path);
         }
     }
 
@@ -106,6 +159,39 @@ public class GameContainer extends BorderPane implements Initializable{
 
             drawImage(x * wElement, y * hElement, wElement, hElement, path);
 
+        }
+    }
+    public void showFloors() {
+        for(GenericElement floor: this.scenario.getFloors()){
+            String wName = floor.getAttr("name").getValue().toString();
+            Point2D point = ((Point2D) floor.getAttr("range").getValue());
+
+            String path = "";
+            for(GenericElement dg: this.dgs){
+                if(wName.equals(dg.getAttr("name").getValue())){
+                    path = new File((String)dg.getAttr("picture").getValue()).toURI().toString();
+                }
+            }
+            System.out.println(path);
+
+            if(point.getX1().equals(point.getX2())  && point.getY1().equals(point.getY2())) {
+                // just one point
+                drawImage(point.getX1() * wElement, point.getY1() * hElement, wElement, hElement, path);
+                //gc.drawImage(new Image(path), point.getX1()*wElement,point.getY1()*hElement,wElement,hElement);
+            } else if(!point.getX1().equals(point.getX2())){
+                // diff x points
+                for(int h= point.getX1(); h <= point.getX2(); h++){
+                    drawImage(h * wElement, point.getY1() * hElement, wElement, hElement, path);
+                    //gc.drawImage(new Image(path), h * wElement, point.getY1()*hElement, wElement,hElement);
+                }
+
+            } else {
+                // diff y points
+                for(int v = point.getY1(); v <= point.getY2(); v++){
+                    drawImage(point.getX1() * wElement, v * hElement, wElement, hElement, path);
+                    //gc.drawImage(new Image(path), point.getX1()*wElement, v*hElement, wElement, hElement);
+                }
+            }
         }
     }
 
