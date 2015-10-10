@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import net.project.utils.GenericElement;
 import net.project.utils.NextGame;
+import net.project.utils.Point2D;
 import net.project.utils.Scenario;
 
 import java.io.File;
@@ -27,6 +28,8 @@ public class GameContainer extends BorderPane implements Initializable{
     
     private final double WIDTH = 800.0;
     private final double HEIGHT = 400.0;
+
+    private double wElement = 0, hElement = 0;
 
     private Canvas canvas = new Canvas(WIDTH, HEIGHT);
     private GraphicsContext gc;
@@ -58,6 +61,86 @@ public class GameContainer extends BorderPane implements Initializable{
     public void setScenario(Scenario scenario) {
         this.scenario = scenario;
         showBG();
+        wElement = WIDTH / this.scenario.getWidth();
+        hElement = HEIGHT / this.scenario.getHeight();
+        showWalls();
+        showVillains();
+        showHero();
+    }
+
+    private void drawImage(double x, double y, double w, double h, String path) {
+        System.out.println(x + " " + y + " " + w + " " + h + " " + path);
+        try {
+            gc.drawImage(new Image(path), x, y, w, h);
+        } catch (Exception e){
+            //
+        }
+    }
+
+    private void showHero(){
+        GenericElement hero = this.scenario.getHero();
+        String hName = hero.getAttr("name").getValue().toString();
+        Integer x = ((Integer) hero.getAttr("x").getValue());
+        Integer y = ((Integer) hero.getAttr("y").getValue());
+        String path = "";
+        for(GenericElement fg: this.fgs){
+            if(hName.equals(fg.getAttr("name").getValue())){
+                path = new File((String)fg.getAttr("picture").getValue()).toURI().toString();
+            }
+        }
+        drawImage(x * wElement, y * hElement, wElement, hElement, path);
+    }
+
+    private void showVillains(){
+        for(GenericElement villain: this.scenario.getVillains()){
+            String vName = villain.getAttr("name").getValue().toString();
+            Integer x = ((Integer) villain.getAttr("x").getValue());
+            Integer y = ((Integer) villain.getAttr("y").getValue());
+
+            String path = "";
+            for(GenericElement fg: this.fgs){
+                if(vName.equals(fg.getAttr("name").getValue())){
+                    path = new File(((String) fg.getAttr("picture").getValue())).toURI().toString();
+                }
+            }
+
+            drawImage(x * wElement, y * hElement, wElement, hElement, path);
+
+        }
+    }
+
+    public void showWalls() {
+        for(GenericElement wall: this.scenario.getWalls()){
+            String wName = wall.getAttr("name").getValue().toString();
+            Point2D point = ((Point2D) wall.getAttr("range").getValue());
+
+            String path = "";
+            for(GenericElement dg: this.dgs){
+                if(wName.equals(dg.getAttr("name").getValue())){
+                    path = new File((String)dg.getAttr("picture").getValue()).toURI().toString();
+                }
+            }
+            System.out.println(path);
+
+            if(point.getX1().equals(point.getX2())  && point.getY1().equals(point.getY2())) {
+                // just one point
+                drawImage(point.getX1() * wElement, point.getY1() * hElement, wElement, hElement, path);
+                //gc.drawImage(new Image(path), point.getX1()*wElement,point.getY1()*hElement,wElement,hElement);
+            } else if(!point.getX1().equals(point.getX2())){
+                // diff x points
+                for(int h= point.getX1(); h <= point.getX2(); h++){
+                    drawImage(h * wElement, point.getY1() * hElement, wElement, hElement, path);
+                    //gc.drawImage(new Image(path), h * wElement, point.getY1()*hElement, wElement,hElement);
+                }
+
+            } else {
+                // diff y points
+                for(int v = point.getY1(); v <= point.getY2(); v++){
+                    drawImage(point.getX1() * wElement, v * hElement, wElement, hElement, path);
+                    //gc.drawImage(new Image(path), point.getX1()*wElement, v*hElement, wElement, hElement);
+                }
+            }
+        }
     }
 
     public void showBG(){

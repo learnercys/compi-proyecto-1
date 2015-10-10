@@ -279,8 +279,20 @@ public class MainCtrl implements Initializable {
                 this.scenariosErrors = true;
             } else {
                 tabScenarios.setDisable(false);
-                this.scc.setScenarios(scenariosParser.scenarios);
+                //this.scc.setScenarios(scenariosParser.scenarios);
                 this.scenariosErrors = false;
+                if(
+                        stc.getBgs().size() == 0
+                        || stc.getFigures().size() == 0
+                        || stc.getDesigns().size() == 0
+                        ){
+                    System.out.println("empty");
+                    return;
+                }
+                scc.initData(stc.getBgs(),
+                        stc.getFigures(),
+                        stc.getDesigns(),
+                        scenariosParser.scenarios);
                 compilationSuccess();
             }
         } catch (Exception e) {

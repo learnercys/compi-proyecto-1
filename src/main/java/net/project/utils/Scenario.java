@@ -46,6 +46,34 @@ public class Scenario {
         return bg;
     }
 
+    public ArrayList<GenericElement> getVillains() {
+        return villains;
+    }
+
+    public ArrayList<GenericElement> getWalls() {
+        return walls;
+    }
+
+    public ArrayList<GenericElement> getFloors() {
+        return floors;
+    }
+
+    public ArrayList<GenericElement> getWeapons() {
+        return weapons;
+    }
+
+    public ArrayList<GenericElement> getBonus() {
+        return bonus;
+    }
+
+    public GenericElement getFinish() {
+        return finish;
+    }
+
+    public GenericElement getHero() {
+        return hero;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

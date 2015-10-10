@@ -1,2 +1,12 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import net.project.components.GameContainer?>
 <fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml">
+    <center>
+        <HBox>
+            <Button fx:id="nextButton">Siguiente</Button>
+            <Button fx:id="prevButton">Anterior</Button>
+        </HBox>
+        <GameContainer fx:id="gameContainer"/>
+    </center>
 </fx:root>
