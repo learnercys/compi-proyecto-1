@@ -13,6 +13,14 @@ parser code{:
     public boolean hasUnRecoveredSyntaxError = false;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
     public ArrayList<Scenario> scenarios = new ArrayList<>();
+
+    public void syntax_error(Symbol cur_token) {
+            HashMap<String, String> error = new HashMap<>();
+            error.put("text", (String) cur_token.value);
+            // todo add token type
+            error.put("number", Integer.toString(errors.size() + 1));
+            errors.add( error );
+        }
 :}
 
 terminal
@@ -124,7 +132,8 @@ scenarios::= scenario:s{:
             | scenario:s scenarios{:
                 this.parser.scenarios.add(s);
                 System.out.println("add scenario");
-            :};
+            :}
+            | error;
 
 scenario::= INIT_SCENARIO scenario_attrs:attrs MORE_THAN scenario_elements:elements END_SCENARIO{:
     RESULT = new Scenario();
