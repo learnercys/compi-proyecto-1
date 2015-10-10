@@ -1,5 +1,6 @@
 package net.project.parser.sequences;
 
+import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.project.utils.GenericAttr;
@@ -9,6 +10,14 @@ parser code{:
     public boolean hasUnRecoveredSyntaxError = false;
     public ArrayList<HashMap<String, String>> errors = new ArrayList<>();
     public ArrayList<GenericElement> sequences = new ArrayList<>();
+
+    public void syntax_error(Symbol cur_token) {
+        HashMap<String, String> error = new HashMap<>();
+        error.put("text", (String) cur_token.value);
+        // todo add token type
+        error.put("number", Integer.toString(errors.size() + 1));
+        errors.add( error );
+    }
 :}
 
 terminal
@@ -42,7 +51,8 @@ non terminal GenericElement
 
 start with sequences;
 
-sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS;
+sequences::= INIT_SCENARIOS sequences_elements END_SCENARIOS
+            | error;
 
 sequences_elements::= sequences_element
                     | sequences_element sequences_elements;
@@ -64,7 +74,8 @@ sequences_element::= INIT_SCENARIO scenario_attrs:sequence MORE_THAN_S{:
             }
         }
     }
-:};
+:}
+| error;
 
 scenario_attrs::= scenario_attr:attr SEMICOLON{:
                     RESULT = new GenericElement();
@@ -74,7 +85,8 @@ scenario_attrs::= scenario_attr:attr SEMICOLON{:
                     RESULT = new GenericElement();
                     RESULT.addAttr(attr);
                     RESULT.addAll(attrs);
-                :};
+                :}
+                | error;
 
 scenario_attr::= NAME EQUAL ID:value{:
                     RESULT = new GenericAttr<String>();

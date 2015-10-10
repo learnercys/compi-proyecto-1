@@ -130,7 +130,7 @@ public class MainCtrl implements Initializable {
             table.setScene(new Scene(loader.load()));
             HTMLCtrl tableCtrl = loader.getController();
             tableCtrl.initData(CFile.read(tmpFile), "Errores");
-            System.out.println("temp" + CFile.read(tmpFile));
+            //System.out.println("temp" + CFile.read(tmpFile));
             table.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -359,6 +359,9 @@ public class MainCtrl implements Initializable {
             }
         } catch (Exception e) {
             // TODO the world is null
+            tabSequences.setDisable(true);
+            this.showErrors();
+            this.sequencesErrors = true;
         }
     }
 
