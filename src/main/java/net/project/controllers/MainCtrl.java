@@ -24,6 +24,8 @@ import net.project.scanner.scenarios.ScenariosScanner;
 import net.project.scanner.sequences.SequencesScanner;
 import net.project.scanner.structures.StructuresScanner;
 import net.project.utils.CFile;
+import net.project.utils.GenericElement;
+import net.project.utils.Scenario;
 
 import java.io.*;
 import java.net.URL;
@@ -137,7 +139,7 @@ public class MainCtrl implements Initializable {
     }
 
     /**
-     * TODO Show the symbols table
+     * Show the symbols table
      */
     public void showSymbolsTable() {
         if(this.lErrors.size() > 0 || this.sErrors.size() > 0) {
@@ -145,11 +147,28 @@ public class MainCtrl implements Initializable {
             return;
         }
 
+        if(
+                stc.getBgs().size() == 0
+                && stc.getFigures().size() == 0
+                && stc.getDesigns().size() == 0
+                && scc.getScenarios().size() == 0
+                && sqc.getSequences().size() == 0
+                ){
+
+            return;
+        }
+
         try {
             MustacheFactory mustacheFactory = new DefaultMustacheFactory();
             Mustache mustache = mustacheFactory.compile(new InputStreamReader(getClass().getResourceAsStream("symbols.mustache")), "symbols.mustache");
             File tmpFile = new File("/tmp/project-symbols.html");
-            SymbolsTable symbolsTable = new SymbolsTable();
+            SymbolsTable symbolsTable = new SymbolsTable(
+                    stc.getBgs(),
+                    stc.getFigures(),
+                    stc.getDesigns(),
+                    scc.getScenarios(),
+                    sqc.getSequences()
+            );
             mustache.execute(new PrintWriter(tmpFile), symbolsTable).flush();
 
             Stage table = new Stage(StageStyle.DECORATED);
@@ -432,6 +451,68 @@ public class MainCtrl implements Initializable {
     }
 
     private class SymbolsTable {
-        public ArrayList<HashMap<String,String>> symbols = new ArrayList<>();
+        //public ArrayList<HashMap<String,String>> symbols = new ArrayList<>();
+        public ArrayList<HashMap<String,String>> bgs = new ArrayList<>();
+        public ArrayList<HashMap<String,String>> fgs = new ArrayList<>();
+        public ArrayList<HashMap<String,String>> dgs = new ArrayList<>();
+        public ArrayList<HashMap<String,String>> scenarios = new ArrayList<>();
+        SymbolsTable(
+                ArrayList<GenericElement> bgs,
+                ArrayList<GenericElement> fgs,
+                ArrayList<GenericElement> dgs,
+                ArrayList<Scenario> scenarios,
+                ArrayList<GenericElement> sequences
+
+        ){
+            // bgs
+            for(GenericElement bg: bgs){
+                HashMap<String, String> newBG = new HashMap<>();
+                newBG.put("name", ((String) bg.getAttr("name").getValue()));
+                newBG.put("picture", ((String) bg.getAttr("picture").getValue()));
+                System.out.println("new bg");
+                this.bgs.add(newBG);
+            }
+
+            // fgs
+            for(GenericElement fg: fgs){
+                HashMap<String, String> newFG = new HashMap<>();
+                newFG.put("name", ((String) fg.getAttr("name").getValue()));
+                newFG.put("picture", ((String) fg.getAttr("picture").getValue()));
+                newFG.put("type", ((String) fg.getAttr("type").getValue()));
+                newFG.put("live", ((Integer) fg.getAttr("live").getValue()).toString());
+                newFG.put("destroy", ((Integer) fg.getAttr("destroy").getValue()).toString());
+                newFG.put("description", ((String) fg.getAttr("description").getValue()));
+                this.fgs.add(newFG);
+            }
+
+            // dgs
+            for(GenericElement dg: dgs) {
+                HashMap<String,String> newDG = new HashMap<>();
+                newDG.put("name", ((String) dg.getAttr("name").getValue()));
+                newDG.put("picture", ((String) dg.getAttr("picture").getValue()));
+                newDG.put("type", ((String) dg.getAttr("type").getValue()));
+
+                if(dg.getAttr("credits")!=null){
+                    newDG.put("credits", ((Integer) dg.getAttr("credits").getValue()).toString());
+                } else {
+                    newDG.put("credits", "");
+                }
+
+                if(dg.getAttr("destroy")!=null){
+                    newDG.put("destroy", ((Integer) dg.getAttr("destroy").getValue()).toString());
+                } else {
+                    newDG.put("destroy", "");
+                }
+                this.dgs.add(newDG);
+            }
+
+            // scenarios
+            for(Scenario scenario: scenarios){
+                HashMap<String, String> sc = new HashMap<>();
+                sc.put("name", scenario.getName());
+                sc.put("type", "escenario");
+                this.scenarios.add(sc);
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@
             display: inline-block;
             padding: 10px 45px;
             text-align: left;
-            width: 45%;
+            width: 75%;
         }
     </style>
 </head>
@@ -40,23 +40,63 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Lexical error</th>
-                <th>Line</th>
-                <th>Column</th>
-                <th>File</th>
+                <th>Tipo</th>
+                <th>Nombre</th>
+                <th>Path</th>
+                <th>Bonos</th>
+                <th>Destrucción</th>
+                <th>Vida</th>
+                <th>Descripción</th>
+                <th>Créditos</th>
             </tr>
             </thead>
             <tbody>
-            {{#symbols}}
+            {{#bgs}}
                 <tr>
-                    <td>{{number}}</td>
-                    <td>{{text}}</td>
-                    <td>{{line}}</td>
-                    <td>{{column}}</td>
-                    <td>{{file}}</td>
+                    <td>fondo</td>
+                    <td>{{name}}</td>
+                    <td>{{picture}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            {{/symbols}}
+            {{/bgs}}
+            {{#fgs}}
+                <tr>
+                    <td>{{type}}</td>
+                    <td>{{name}}</td>
+                    <td>{{picture}}</td>
+                    <td></td>
+                    <td>{{destroy}}</td>
+                    <td>{{live}}</td>
+                    <td>{{description}}</td>
+                </tr>
+            {{/fgs}}
+            {{#dgs}}
+                <tr>
+                    <td>{{type}}</td>
+                    <td>{{name}}</td>
+                    <td>{{picture}}</td>
+                    <td></td>
+                    <td>{{destroy}}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{credits}}</td>
+                </tr>
+            {{/dgs}}
+            {{#scenarios}}
+                <tr>
+                    <td>{{type}}</td>
+                    <td>{{name}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {{/scenarios}}
             </tbody>
         </table>
     </div>
